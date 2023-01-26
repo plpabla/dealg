@@ -1,0 +1,62 @@
+@startuml
+class System
+{
+    - GenericWindow windows[]
+    - GenericWindow current_window
+    - Canvas c
+    + draw() // loop over windows and next calls c.render()
+    + keyboard_handler()
+}
+
+
+abstract GenericWindow
+{
+    + {abstract} draw(Canvas &c, int x, int y)
+}
+
+class Canvas
+{
+    + render()
+    + string[H] canvas
+}
+
+System *-- Canvas
+System *-- GenericWindow
+
+
+class PopupWindow
+class Frame
+class ListWindow
+{
+    - Item items[]
+    - Item* current_item
+    + {abstract} navigate()
+}
+GenericWindow <|-- ListWindow
+GenericWindow <|-- PopupWindow
+GenericWindow <|-- Frame
+
+abstract Item
+{
+    - String name
+    - float price
+    + {abstract} update()
+    + {abstract} randomize()
+}
+class Stock
+{
+    - int quantity
+    + get_price()
+    + get_qty()
+    + buy(int n)
+    + sell(int n)
+}
+class Ticket
+{
+    
+}
+Item <|-- Stock
+Item <|-- Ticket
+
+ListWindow *- Item
+@enduml
