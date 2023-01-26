@@ -8,7 +8,6 @@ on:
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
 
     steps:
@@ -17,6 +16,8 @@ jobs:
       run: cmake CMakeLists.txt
     - name: run make
       run: make
+  
+  test:
     - name: run tests
       run: ./runTests
       
