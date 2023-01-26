@@ -7,7 +7,7 @@ Canvas::Canvas(char fill)
 {
     for(auto & line: canvas)
     {
-        line = string(SCREEN_WIDTH, fill);
+        line = string(SCREEN_WIDTH, '.');
     }
 }
 
