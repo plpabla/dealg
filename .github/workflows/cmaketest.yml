@@ -16,7 +16,7 @@ jobs:
     - name: create build directory
       run: mkdir build && cd build
     - name: run cmake
-      run: cmake ..
+      run: cmake ../CMakeLists.txt
     - name: run make
       run: make
     - name: run tests
