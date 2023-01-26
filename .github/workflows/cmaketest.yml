@@ -18,7 +18,7 @@ jobs:
       run: make
   
   test:
-    runs-on: ubuntu-latest
+    steps:
     - name: run tests
       run: ./runTests
       
