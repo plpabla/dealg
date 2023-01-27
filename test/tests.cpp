@@ -85,16 +85,37 @@ TEST(FrameTest, DrawOnePointOutsideBoundShouldDoNothing)
     f0.draw(c, SCREEN_WIDTH, SCREEN_HEIGHT);
 }
 
-// TEST(FrameTest, DrawSquare2x2)
-// {
-//     Frame f0(2, 2);
-//     Canvas c;
-//     f0.draw(c, 0, 0);
-//     ASSERT_EQ(c.canvas[0][0], 'X') << "Frame drawn here";
-//     ASSERT_EQ(c.canvas[0][1], ' ') << "Empty here";
-//     ASSERT_EQ(c.canvas[1][0], ' ') << "Empty here";
-//     ASSERT_EQ(c.canvas[1][1], ' ') << "Empty here";
-// }
+TEST(FrameTest, FrameMx1IsCreatedCorrectly)
+{
+    Frame f0(4, 1, 'x');
+    Canvas c('.');
+    f0.draw(c, 0, 0);
+    string expected = "xxxx.";
+    string received = c.canvas[0].substr(0, 5);
+    ASSERT_TRUE(expected == received) << expected << " != " << received;
+}
+
+TEST(FrameTest, FrameMx1IsCreatedCorrectlyInAnotherPlace)
+{
+    Frame f0(4, 1, 'x');
+    Canvas c('.');
+    f0.draw(c, 2, 2);
+    string expected = "..xxxx.";
+    string received = c.canvas[2].substr(0, 7);
+    ASSERT_TRUE(expected == received) << expected << " != " << received;
+}
+
+TEST(FrameTest, FrameMx1outOfBoundIsCropped)
+{
+    Frame f0(40, 1, 'x');
+    Canvas c('.');
+    f0.draw(c, SCREEN_WIDTH-2, 0);
+    string expected = ".xx";
+    string received = c.canvas[0].substr(SCREEN_WIDTH-3, 3); 
+    ASSERT_TRUE(expected == received) 
+        << expected << " != " << received << endl << "full line: " << c.canvas[0];  
+    ASSERT_EQ(c.canvas[0].length(), SCREEN_WIDTH) << "string has different length";
+}
 
 
 int main(int argc, char **argv) {

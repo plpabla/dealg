@@ -15,5 +15,9 @@ void Frame::draw(Canvas &c, int x, int y)
 {
     if(x>=SCREEN_WIDTH) return;
     if(y>=SCREEN_HEIGHT) return;
-    c.canvas[y][x] = border_ch;
+
+    for(int x_cnt = 0; x_cnt<width; x_cnt++)
+    {
+        c.canvas[y][x+x_cnt] = border_ch;
+    }
 }
