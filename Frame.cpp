@@ -8,7 +8,7 @@ Frame::Frame(int w, int h, char border)
 {
     this->border_ch = border;
     this->width = w;
-    this->height = (h<SCREEN_HEIGHT) ? h : SCREEN_HEIGHT;
+    this->height = h;
 }
 
 void Frame::draw(Canvas &c, int x, int y)

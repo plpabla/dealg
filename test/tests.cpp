@@ -48,12 +48,6 @@ TEST(FrameTest, InitializedParamFrameReturnsNewDim) {
     ASSERT_EQ(f0.GetHeight(), 20);
 }
 
-TEST(FrameTest, InitializedParamFrameWithTooHighHeightReturnsMaxH) { 
-    Frame f0(100, 200);
-    ASSERT_EQ(f0.GetWidth(), 100);
-    ASSERT_EQ(f0.GetHeight(), SCREEN_HEIGHT);
-}
-
 TEST(FrameTest, DrawOneDefaultPointOnBeginningOfCanvas)
 {
     Frame f0(1, 1);
