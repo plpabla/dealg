@@ -34,6 +34,16 @@ TEST(CanvasTest, FilledWithX)
 }
 
 /************************
+ * Canvas helpers
+*************************/
+void CompareStringParts(string expected, const Canvas c, int col, int row)
+{
+    string part = c.canvas[col].substr(row, expected.length());
+    ASSERT_TRUE(expected == part) 
+        << expected << " != " << part << endl << "[" << c.canvas[col] << "]" <<endl;
+}
+
+/************************
  * Frame
 *************************/
 TEST(FrameTest, InitializedDefaultFrameHasCorrectSize) { 
@@ -100,9 +110,7 @@ TEST(FrameTest, FrameMx1IsCreatedCorrectlyInAnotherPlace)
     Frame f0(4, 1, 'x');
     Canvas c('.');
     f0.draw(c, 2, 2);
-    string expected = "..xxxx.";
-    string received = c.canvas[2].substr(0, 7);
-    ASSERT_TRUE(expected == received) << expected << " != " << received;
+    CompareStringParts("..xxxx.", c, 2, 0);
 }
 
 TEST(FrameTest, FrameMx1outOfBoundIsCropped)
@@ -110,10 +118,7 @@ TEST(FrameTest, FrameMx1outOfBoundIsCropped)
     Frame f0(40, 1, 'x');
     Canvas c('.');
     f0.draw(c, SCREEN_WIDTH-2, 0);
-    string expected = ".xx";
-    string received = c.canvas[0].substr(SCREEN_WIDTH-3, 3); 
-    ASSERT_TRUE(expected == received) 
-        << expected << " != " << received << endl << "full line: " << c.canvas[0];  
+    CompareStringParts(".xx", c, 0, SCREEN_WIDTH-3);
     ASSERT_EQ(c.canvas[0].length(), SCREEN_WIDTH) << "string has different length";
 }
 
