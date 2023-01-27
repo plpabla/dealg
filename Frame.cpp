@@ -2,6 +2,8 @@
 #include "Frame.h"
 #include "parameters.h"
 
+#define MIN(a, b) ( (a)>(b) ? (b) : (a) )
+
 using namespace std;
 
 Frame::Frame(int w, int h, char border)
@@ -16,8 +18,13 @@ void Frame::draw(Canvas &c, int x, int y)
     if(x>=SCREEN_WIDTH) return;
     if(y>=SCREEN_HEIGHT) return;
 
-    for(int x_cnt = 0; x_cnt<width; x_cnt++)
-    {
-        c.canvas[y][x+x_cnt] = border_ch;
-    }
+    bool is_cropped = (width+x) > SCREEN_WIDTH;
+    int chars_to_be_replaced = is_cropped ? (SCREEN_WIDTH-x) : (width);
+    string line = string(chars_to_be_replaced, border_ch);
+
+    cout << c.canvas[y] << endl;
+    cout << "Replacing " << chars_to_be_replaced << " characters" << endl;
+    c.canvas[y].replace(x, chars_to_be_replaced, line);
+
+    cout << c.canvas[y] << endl;
 }
