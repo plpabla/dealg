@@ -24,15 +24,17 @@ void Frame::draw(Canvas &c, int x, int y)
 
     for(int row=y; row<(height+y); row++)
     {
+        #ifdef DEBUG
+            string original_row = c.canvas[row];
+        #endif
+
         if(row>=SCREEN_HEIGHT) break;
-    #ifdef DEBUG
-        cout << "Replacing " << chars_to_be_replaced << " characters:" << endl;
-        cout << "  <<[" << c.canvas[row] << "]" << endl;
-    #endif
         c.canvas[row].replace(x, chars_to_be_replaced, line);
 
-    #ifdef DEBUG
-        cout << "  >>[" << c.canvas[row] << "]" << endl;
-    #endif
+        #ifdef DEBUG
+            cout << "Replacing " << chars_to_be_replaced << " characters:" << endl;
+            cout << "  <<[" << original_row << "]" << endl;
+            cout << "  >>[" << c.canvas[row] << "]" << endl;
+        #endif
     }
 }
