@@ -7,7 +7,6 @@
 class GenericWindow
 {
 protected:
-    std::string canvas[SCREEN_HEIGHT];
     int width = SCREEN_WIDTH;
     int height = SCREEN_HEIGHT;
     char border_ch = 'X';
