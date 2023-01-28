@@ -4,7 +4,6 @@
 #include "../Canvas.h"
 #include "../parameters.h"
 
-namespace {
 using namespace std;
 
 /************************
@@ -155,4 +154,3 @@ TEST(FrameTest, Frame1xNCreatedOutOfBoundDoesntGenereateError)
     }
 }
 
-}

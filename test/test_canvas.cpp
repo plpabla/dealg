@@ -3,8 +3,6 @@
 #include "../Canvas.h"
 #include "../parameters.h"
 
-namespace {
-
 using namespace std;
 /************************
  * Canvas
@@ -34,4 +32,3 @@ TEST(CanvasTest, FilledWithX)
     ASSERT_EQ(c.canvas[0][0], 'X');
 }
 
-}
