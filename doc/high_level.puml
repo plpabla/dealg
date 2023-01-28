@@ -32,8 +32,8 @@ class ListWindow
     - Item* current_item
     + {abstract} navigate()
 }
-GenericWindow <|-- ListWindow
-GenericWindow <|-- PopupWindow
+Frame <|-- ListWindow
+Frame <|-- PopupWindow
 GenericWindow <|-- Frame
 
 abstract Item

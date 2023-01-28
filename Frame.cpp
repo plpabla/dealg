@@ -22,17 +22,17 @@ void Frame::draw(Canvas &c, int x, int y)
     int chars_to_be_replaced = is_cropped ? (SCREEN_WIDTH-x) : (width);
     string line = string(chars_to_be_replaced, border_ch);
 
-    for(int row=0; row<height; row++)
+    for(int row=y; row<(height+y); row++)
     {
-        if((y+row)>=SCREEN_HEIGHT) break;
+        if(row>=SCREEN_HEIGHT) break;
     #ifdef DEBUG
         cout << "Replacing " << chars_to_be_replaced << " characters:" << endl;
-        cout << "  <<[" << c.canvas[y+row] << "]" << endl;
+        cout << "  <<[" << c.canvas[row] << "]" << endl;
     #endif
-        c.canvas[y+row].replace(x, chars_to_be_replaced, line);
+        c.canvas[row].replace(x, chars_to_be_replaced, line);
 
     #ifdef DEBUG
-        cout << "  >>[" << c.canvas[y+row] << "]" << endl;
+        cout << "  >>[" << c.canvas[row] << "]" << endl;
     #endif
     }
 }
