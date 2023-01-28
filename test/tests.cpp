@@ -1,5 +1,6 @@
 #include <gtest/gtest.h>
 #include <string>
+#include <sstream>
 #include "../Frame.h"
 #include "../Canvas.h"
 #include "../parameters.h"
@@ -36,11 +37,12 @@ TEST(CanvasTest, FilledWithX)
 /************************
  * Canvas helpers
 *************************/
-void CompareStringParts(string expected, const Canvas c, int col, int row)
+void CompareStringParts(string expected, const Canvas c, int col, int row, string extra_msg="")
 {
     string part = c.canvas[col].substr(row, expected.length());
     ASSERT_TRUE(expected == part) 
-        << expected << " != " << part << endl << "[" << c.canvas[col] << "]" <<endl;
+        << expected << " != " << part << endl 
+        << "[" << c.canvas[row] << "]" << " (" << extra_msg << ")" << endl;
 }
 
 /************************
@@ -100,9 +102,7 @@ TEST(FrameTest, FrameMx1IsCreatedCorrectly)
     Frame f0(4, 1, 'x');
     Canvas c('.');
     f0.draw(c, 0, 0);
-    string expected = "xxxx.";
-    string received = c.canvas[0].substr(0, 5);
-    ASSERT_TRUE(expected == received) << expected << " != " << received;
+    CompareStringParts("xxxx.", c, 0, 0);
 }
 
 TEST(FrameTest, FrameMx1IsCreatedCorrectlyInAnotherPlace)
@@ -120,6 +120,21 @@ TEST(FrameTest, FrameMx1outOfBoundIsCropped)
     f0.draw(c, SCREEN_WIDTH-2, 0);
     CompareStringParts(".xx", c, 0, SCREEN_WIDTH-3);
     ASSERT_EQ(c.canvas[0].length(), SCREEN_WIDTH) << "string has different length";
+}
+
+TEST(FrameTest, Frame1xNIsCreatedCorrectly)
+{
+    constexpr int HEIGHT = 4;
+    Frame f0(1, HEIGHT, 'x');
+    Canvas c('.');
+    f0.draw(c, 0, 0);
+    for(int row=0; row<HEIGHT; row++)
+    {
+        ostringstream msg;
+        msg << "Error for row " << row;
+        CompareStringParts("x.", c, 0, row, msg.str());
+    }
+    CompareStringParts("..", c, 0, HEIGHT);
 }
 
 
