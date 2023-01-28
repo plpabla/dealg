@@ -118,7 +118,9 @@ TEST(FrameTest, FrameMx1outOfBoundIsCropped)
 {
     Frame f0(40, 1, 'x');
     Canvas c('.');
-    f0.draw(c, SCREEN_WIDTH-2, 0);
+
+    ASSERT_NO_THROW(f0.draw(c, SCREEN_WIDTH-2, 0));
+    
     CompareStringParts(".xx", c, SCREEN_WIDTH-3, 0);
     ASSERT_EQ(c.canvas[0].length(), SCREEN_WIDTH) << "string has different length";
 }
@@ -155,6 +157,21 @@ TEST(FrameTest, Frame1xNIsCreatedCorrectlyInDiffPlace)
     CompareStringParts("...", c, X_0-1, Y_0+HEIGHT);
 }
 
+TEST(FrameTest, Frame1xNCreatedOutOfBoundDoesntGenereateError)
+{
+    constexpr int HEIGHT = 40;
+    constexpr int X_0 = 3;
+    constexpr int Y_0 = SCREEN_HEIGHT-2;
+    Frame f0(1, HEIGHT, 'x');
+    Canvas c('.');
+    
+    ASSERT_NO_THROW(f0.draw(c, X_0, Y_0));
+
+    for(int row=Y_0; row<SCREEN_HEIGHT; row++)
+    {
+        CompareStringParts(".x.", c, X_0-1, row);
+    }
+}
 
 int main(int argc, char **argv) {
     testing::InitGoogleTest(&argc, argv);

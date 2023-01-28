@@ -24,6 +24,7 @@ void Frame::draw(Canvas &c, int x, int y)
 
     for(int row=0; row<height; row++)
     {
+        if((y+row)>=SCREEN_HEIGHT) break;
     #ifdef DEBUG
         cout << "Replacing " << chars_to_be_replaced << " characters:" << endl;
         cout << "  <<[" << c.canvas[y+row] << "]" << endl;
