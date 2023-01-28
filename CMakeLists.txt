@@ -16,12 +16,9 @@ FetchContent_MakeAvailable(googletest)
 
 add_library(canvas Canvas.cpp) 
 add_library(frame Frame.cpp)
-add_library(test_canvas test/test_canvas.cpp)
-add_library(test_frame test/test_frame.cpp)
 
-add_executable(runTests test/tests.cpp)
+add_executable(runTests test/tests.cpp test/test_canvas.cpp test/test_frame.cpp)
 target_link_libraries(runTests GTest::gtest_main frame canvas)
-target_link_libraries(runTests test_canvas test_frame)
 
 
 include(GoogleTest)
