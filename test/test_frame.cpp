@@ -20,7 +20,7 @@ void CompareStringParts(string expected, const Canvas c, int col, int row, strin
 }
 
 /************************
- * Frame
+ * Frame init
 *************************/
 TEST(FrameTest, InitializedDefaultFrameHasCorrectSize) { 
     Frame f0;
@@ -34,6 +34,9 @@ TEST(FrameTest, InitializedParamFrameReturnsNewDim) {
     ASSERT_EQ(f0.GetHeight(), 20);
 }
 
+/************************
+ * Frame 1x1
+*************************/
 TEST(FrameTest, DrawOneDefaultPointOnBeginningOfCanvas)
 {
     Frame f0(1, 1);
@@ -71,6 +74,9 @@ TEST(FrameTest, DrawOnePointOutsideBoundShouldDoNothing)
     f0.draw(c, SCREEN_WIDTH, SCREEN_HEIGHT);
 }
 
+/************************
+ * Frame M x 1
+*************************/
 TEST(FrameTest, FrameMx1IsCreatedCorrectly)
 {
     Frame f0(4, 1, 'x');
@@ -98,6 +104,9 @@ TEST(FrameTest, FrameMx1outOfBoundIsCropped)
     ASSERT_EQ(c.canvas[0].length(), SCREEN_WIDTH) << "string has different length";
 }
 
+/************************
+ * Frame 1 x N
+*************************/
 TEST(FrameTest, Frame1xNIsCreatedCorrectly)
 {
     constexpr int HEIGHT = 4;
