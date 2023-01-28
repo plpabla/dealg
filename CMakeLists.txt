@@ -14,8 +14,6 @@ FetchContent_Declare(
 )
 FetchContent_MakeAvailable(googletest)
 
-add_subdirectory(${CMAKE_BINARY_DIR}/lib)
-
 add_library(canvas Canvas.cpp) 
 add_library(frame Frame.cpp)
 
