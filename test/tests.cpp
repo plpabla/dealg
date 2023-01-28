@@ -138,6 +138,23 @@ TEST(FrameTest, Frame1xNIsCreatedCorrectly)
     CompareStringParts("..", c, 0, HEIGHT);
 }
 
+TEST(FrameTest, Frame1xNIsCreatedCorrectlyInDiffPlace)
+{
+    constexpr int HEIGHT = 4;
+    constexpr int X_0 = 3;
+    constexpr int Y_0 = 6;
+    Frame f0(1, HEIGHT, 'x');
+    Canvas c('.');
+    f0.draw(c, X_0, Y_0);
+    for(int row=Y_0; row<(Y_0+HEIGHT); row++)
+    {
+        ostringstream msg;
+        msg << "Error for row " << row;
+        CompareStringParts(".x.", c, X_0-1, row, msg.str());
+    }
+    CompareStringParts("...", c, X_0-1, Y_0+HEIGHT);
+}
+
 
 int main(int argc, char **argv) {
     testing::InitGoogleTest(&argc, argv);

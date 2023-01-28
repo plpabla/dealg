@@ -25,13 +25,13 @@ void Frame::draw(Canvas &c, int x, int y)
     for(int row=0; row<height; row++)
     {
     #ifdef DEBUG
-        cout << c.canvas[y+row] << endl;
-        cout << "Replacing " << chars_to_be_replaced << " characters" << endl;
+        cout << "Replacing " << chars_to_be_replaced << " characters:" << endl;
+        cout << "  <<[" << c.canvas[y+row] << "]" << endl;
     #endif
         c.canvas[y+row].replace(x, chars_to_be_replaced, line);
 
     #ifdef DEBUG
-        cout << c.canvas[y+row] << endl;
+        cout << "  >>[" << c.canvas[y+row] << "]" << endl;
     #endif
     }
 }
