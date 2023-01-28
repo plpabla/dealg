@@ -2,7 +2,7 @@
 #include "Frame.h"
 #include "parameters.h"
 
-#define MIN(a, b) ( (a)>(b) ? (b) : (a) )
+#define DEBUG
 
 using namespace std;
 
@@ -22,9 +22,13 @@ void Frame::draw(Canvas &c, int x, int y)
     int chars_to_be_replaced = is_cropped ? (SCREEN_WIDTH-x) : (width);
     string line = string(chars_to_be_replaced, border_ch);
 
+#ifdef DEBUG
     cout << c.canvas[y] << endl;
     cout << "Replacing " << chars_to_be_replaced << " characters" << endl;
+#endif
     c.canvas[y].replace(x, chars_to_be_replaced, line);
 
+#ifdef DEBUG
     cout << c.canvas[y] << endl;
+#endif
 }
