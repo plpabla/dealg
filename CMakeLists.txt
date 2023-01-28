@@ -19,7 +19,7 @@ add_library(frame Frame.cpp)
 add_library(test_canvas test/test_canvas.cpp)
 
 add_executable(runTests test/tests.cpp test/test_canvas.cpp test/test_frame.cpp)
-target_link_libraries(runTests GTest::gtest_main frame canvas)
+target_link_libraries(runTests GTest::gtest_main frame canvas test_canvas)
 
 include(GoogleTest)
 gtest_discover_tests(runTests)
