@@ -1,5 +1,4 @@
-#include <gtest/gtest.h>
-#include <string>
+#include "tests.h"
 #include "../Canvas.h"
 #include "../parameters.h"
 

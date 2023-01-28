@@ -1,7 +1,6 @@
-#include <gtest/gtest.h>
-#include <string>
-#include "../Frame.h"
+#include "tests.h"
 #include "../Canvas.h"
+#include "../Frame.h"
 #include "../parameters.h"
 
 using namespace std;
