@@ -4,6 +4,7 @@
 #include "../Frame.h"
 #include "../Canvas.h"
 #include "../parameters.h"
+namespace {
 
 using namespace std;
 /************************
@@ -120,7 +121,7 @@ TEST(FrameTest, FrameMx1outOfBoundIsCropped)
     Canvas c('.');
 
     ASSERT_NO_THROW(f0.draw(c, SCREEN_WIDTH-2, 0));
-    
+
     CompareStringParts(".xx", c, SCREEN_WIDTH-3, 0);
     ASSERT_EQ(c.canvas[0].length(), SCREEN_WIDTH) << "string has different length";
 }
@@ -176,4 +177,6 @@ TEST(FrameTest, Frame1xNCreatedOutOfBoundDoesntGenereateError)
 int main(int argc, char **argv) {
     testing::InitGoogleTest(&argc, argv);
     return RUN_ALL_TESTS();
+}
+
 }
