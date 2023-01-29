@@ -16,58 +16,29 @@ Frame::Frame(int w, int h, char border, char fill)
 
 void Frame::draw(Canvas &c, int x, int y)
 {
+    cout << "Drawing frame at (" <<x << ", " << y << ") " << width << "x" << height << endl;
     if(x>=SCREEN_WIDTH) return;
     if(y>=SCREEN_HEIGHT) return;
 
-    bool is_cropped = (width+x) > SCREEN_WIDTH;
-    int chars_to_be_replaced = is_cropped ? (SCREEN_WIDTH-x) : (width);
-    string border_line = string(chars_to_be_replaced, border_ch);
-    string line;
-
-    if(is_cropped)
+    bool border = true;
+    bool border_line = true;
+    for(int row=y; row<(y+height); row++)
     {
-        if((chars_to_be_replaced-1) > 0)
-        {
-            line = border_ch + string(chars_to_be_replaced-1, fill_ch);
-        } else
-        {
-            line = string(2, border_ch);
-        }
-    } else
-    {
-        if((chars_to_be_replaced-2) > 0)
-        {
-            line = border_ch + string(chars_to_be_replaced-2, fill_ch) + border_ch;
-        } else
-        {
-            line = string(chars_to_be_replaced, border_ch);
-        }
-    }
-
-    cout << "Border: [" << border_line << "]\n";    
-    cout << "Line:   [" << line << "]\n";
-
-    // Top border
-    int row = y;
-    c.canvas[y].replace(x, chars_to_be_replaced, border_line);
-    row++;
-    for(; row<(height+y-1); row++)
-    {
-        #ifdef DEBUG
-            string original_row = c.canvas[row];
-        #endif
-
         if(row>=SCREEN_HEIGHT) return;
-        c.canvas[row].replace(x, chars_to_be_replaced, line);
-
-        #ifdef DEBUG
-            cout << "Replacing " << chars_to_be_replaced << " characters:" << endl;
-            cout << "  <<[" << original_row << "]" << endl;
-            cout << "  >>[" << c.canvas[row] << "]" << endl;
-        #endif
+        for(int col=x; col<(x+width); col++)
+        {
+            // Check if we should start a new line
+            if(col>=SCREEN_WIDTH)
+            {
+                border = true;
+                break;
+            } 
+            c.canvas[row][col] = (border ? border_ch : fill_ch);
+            if(!border_line) border=false;
+            if(col==(x+width-2)) border=true;
+        }
+        border = true;
+        border_line = false;
+        if(row==(y+height-2)) border_line = true;
     }
-
-    // Bottom border
-    if(row>=SCREEN_HEIGHT) return;
-    c.canvas[height+y-1].replace(x, chars_to_be_replaced, border_line);
 }

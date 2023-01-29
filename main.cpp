@@ -6,7 +6,8 @@ int main()
 {
     Frame f0(16, 4, '*',' ');
     Canvas c('.');
-    f0.draw(c, 1, 1);
+    f0.draw(c, 3, 1);
+    f0.draw(c, 76, 22);
     c.render();
     return 0;
 }
