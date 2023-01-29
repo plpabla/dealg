@@ -20,25 +20,30 @@ void Frame::draw(Canvas &c, int x, int y)
     if(x>=SCREEN_WIDTH) return;
     if(y>=SCREEN_HEIGHT) return;
 
-    bool border = true;
-    bool border_line = true;
+    bool border_point = true;
+    bool it_is_border_line = true;
     for(int row=y; row<(y+height); row++)
     {
         if(row>=SCREEN_HEIGHT) return;
+        if(row==(y+height-1)) it_is_border_line = true;
+
         for(int col=x; col<(x+width); col++)
         {
+            // Set back to border point for the last one
+            if(col==(x+width-1)) border_point=true;
+
             // Check if we should start a new line
             if(col>=SCREEN_WIDTH)
             {
-                border = true;
+                border_point = true;
                 break;
             } 
-            c.canvas[row][col] = (border ? border_ch : fill_ch);
-            if(!border_line) border=false;
-            if(col==(x+width-2)) border=true;
+
+            // Draw character (border or fill)
+            c.canvas[row][col] = (border_point ? border_ch : fill_ch);
+            if(!it_is_border_line) border_point=false;
         }
-        border = true;
-        border_line = false;
-        if(row==(y+height-2)) border_line = true;
+        border_point = true;
+        it_is_border_line = false;
     }
 }
