@@ -10,6 +10,7 @@ protected:
     int width = SCREEN_WIDTH;
     int height = SCREEN_HEIGHT;
     char border_ch = 'X';
+    char fill_ch = ' ';
 public:
     GenericWindow() {};
     virtual ~GenericWindow() {};

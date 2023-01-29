@@ -13,5 +13,9 @@ Canvas::Canvas(char fill)
 
 void Canvas::render(void)
 {
-    // TODO
+    for(auto line: canvas)
+    {
+        cout << line << '\n';
+    }
+    cout << flush;
 }

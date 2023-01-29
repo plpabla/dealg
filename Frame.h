@@ -6,6 +6,6 @@
 class Frame: public GenericWindow
 {
     public:
-    Frame(int w=SCREEN_WIDTH, int h=SCREEN_HEIGHT, char border='X');
+    Frame(int w=SCREEN_WIDTH, int h=SCREEN_HEIGHT, char border='X', char fill=' ');
     void draw(Canvas &c, int x, int y) override;
 };

@@ -156,5 +156,31 @@ TEST(FrameTest, Frame1xNCreatedOutOfBoundDoesntGenereateError)
 /************************
  * Frame M x N
 *************************/
+TEST(FrameTest, FrameMxNCreated)
+{
+    constexpr int X_0 = 0;
+    constexpr int Y_0 = 0;
+    Frame f0(3, 2, 'x');
+    Canvas c('.');
+    
+    ASSERT_NO_THROW(f0.draw(c, X_0, Y_0));
 
-// TODO: 
+    CompareStringParts("xxx..", c, X_0, 0);
+    CompareStringParts("xxx..", c, X_0, 1);
+    CompareStringParts(".....", c, X_0, 2);
+}
+
+TEST(FrameTest, FrameMxNEmptyInside)
+{
+    constexpr int X_0 = 0;
+    constexpr int Y_0 = 0;
+    Frame f0(4, 3, 'x');
+    Canvas c('.');
+    
+    ASSERT_NO_THROW(f0.draw(c, X_0, Y_0));
+
+    CompareStringParts("xxxx..", c, X_0, 0);
+    CompareStringParts("x  x..", c, X_0, 1);
+    CompareStringParts("xxxx..", c, X_0, 2);
+    CompareStringParts("......", c, X_0, 3);
+}
