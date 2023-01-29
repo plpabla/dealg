@@ -3,7 +3,7 @@
 # ./runTests
 
 cmake_minimum_required(VERSION 2.6)
-project(runTest)
+project(dealg)
 
 set(CMAKE_CXX_STANDARD 14)
 
@@ -25,5 +25,5 @@ include(GoogleTest)
 gtest_discover_tests(runTests)
 
 # Prepare also main
-add_executable(main main.cpp)
-target_link_libraries(main frame canvas)
+add_executable(${PROJECT_NAME} main.cpp)
+target_link_libraries(${PROJECT_NAME} frame canvas)

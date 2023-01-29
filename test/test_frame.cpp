@@ -153,3 +153,8 @@ TEST(FrameTest, Frame1xNCreatedOutOfBoundDoesntGenereateError)
     }
 }
 
+/************************
+ * Frame M x N
+*************************/
+
+// TODO: 
