@@ -14,14 +14,12 @@ void Frame::draw(Canvas &c, int x, int y)
         cout << "Drawing frame at (" <<x << ", " << y << ") " << width << "x" << height << endl;
     #endif
 
-    if(x>=SCREEN_WIDTH) return;
-    if(y>=SCREEN_HEIGHT) return;
-
     bool border_point = true;
     bool it_is_border_line = true;
     for(int row=y; row<(y+height); row++)
     {
         if(row>=SCREEN_HEIGHT) return;
+        // last line is also border
         if(row==(y+height-1)) it_is_border_line = true;
 
         for(int col=x; col<(x+width); col++)
@@ -40,7 +38,10 @@ void Frame::draw(Canvas &c, int x, int y)
             c.canvas[row][col] = (border_point ? border_ch : fill_ch);
             if(!it_is_border_line) border_point=false;
         }
+        // we start as a border point
         border_point = true;
+
+        // after first line, following are no borders
         it_is_border_line = false;
     }
 }
