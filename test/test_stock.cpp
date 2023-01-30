@@ -4,7 +4,16 @@
 
 using namespace std;
 
-TEST(StockTest, CanGenerateItem)
+TEST(StockTest, CanGenerateItemWith012args)
 {
-    Stock s("Wheat");
+    Stock s1();
+    Stock s2("Wheat");
+    Stock s3("Wheat", 42.0);
+}
+
+TEST(StockTest, CanAccessItemNameAndPrice)
+{
+    Stock s("Wheat", 42.0);
+    ASSERT_TRUE(s.getName()=="Wheat");
+    ASSERT_FLOAT_EQ(42.0, s.getPrice());
 }
