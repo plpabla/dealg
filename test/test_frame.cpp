@@ -1,4 +1,4 @@
-#include "tests.h"
+#include <gtest/gtest.h>
 #include "../Canvas.h"
 #include "../Frame.h"
 #include "../parameters.h"
