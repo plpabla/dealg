@@ -1,9 +1,10 @@
 #include <gtest/gtest.h>
 #include "../parameters.h"
+#include "../Stock.h"
 
 using namespace std;
 
-TEST(StockTest, ShouldNotFail)
+TEST(StockTest, CanGenerateItem)
 {
-    ASSERT_TRUE(1);
+    Stock s("Wheat");
 }
