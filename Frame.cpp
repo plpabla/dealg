@@ -6,13 +6,7 @@
 
 using namespace std;
 
-Frame::Frame(int w, int h, char border, char fill)
-{
-    this->width = w;
-    this->height = h;
-    this->border_ch = border;
-    this->fill_ch = fill;
-}
+Frame::Frame(int w, int h, char border, char fill): GenericWindow(w,h,border, fill) { };
 
 void Frame::draw(Canvas &c, int x, int y)
 {

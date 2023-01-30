@@ -184,3 +184,46 @@ TEST(FrameTest, FrameMxNEmptyInside)
     CompareStringParts("xxxx..", c, X_0, 2);
     CompareStringParts("......", c, X_0, 3);
 }
+
+TEST(FrameTest, FrameMxNOnBorder)
+{
+    constexpr int X_0 = SCREEN_WIDTH-5;
+    constexpr int Y_0 = SCREEN_HEIGHT-4;
+    Frame f0(5, 4, 'x');
+    Canvas c('.');
+    
+    ASSERT_NO_THROW(f0.draw(c, X_0, Y_0));
+
+    CompareStringParts("......", c, X_0-1, SCREEN_HEIGHT-5);
+    CompareStringParts(".xxxxx", c, X_0-1, SCREEN_HEIGHT-4);
+    CompareStringParts(".x   x", c, X_0-1, SCREEN_HEIGHT-3);
+    CompareStringParts(".x   x", c, X_0-1, SCREEN_HEIGHT-2);
+    CompareStringParts(".xxxxx", c, X_0-1, SCREEN_HEIGHT-1);
+}
+
+TEST(FrameTest, FrameMxNOnBorderPlus1)
+{
+    constexpr int X_0 = SCREEN_WIDTH-4;
+    constexpr int Y_0 = SCREEN_HEIGHT-3;
+    Frame f0(5, 4, 'x');
+    Canvas c('.');
+    
+    ASSERT_NO_THROW(f0.draw(c, X_0, Y_0));
+
+    CompareStringParts(".....", c, X_0-1, SCREEN_HEIGHT-4,"top");
+    CompareStringParts(".xxxx", c, X_0-1, SCREEN_HEIGHT-3);
+    CompareStringParts(".x   ", c, X_0-1, SCREEN_HEIGHT-2);
+    CompareStringParts(".x   ", c, X_0-1, SCREEN_HEIGHT-1,"bottom");
+}
+
+TEST(FrameTest, FrameMxNOnBorderOnlyCorner)
+{
+    constexpr int X_0 = SCREEN_WIDTH-1;
+    constexpr int Y_0 = SCREEN_HEIGHT-1;
+    Frame f0(5, 4, 'x');
+    Canvas c('.');
+    
+    ASSERT_NO_THROW(f0.draw(c, X_0, Y_0));
+
+    CompareStringParts(".x", c, X_0-1, SCREEN_HEIGHT-1,"bottom");
+}
