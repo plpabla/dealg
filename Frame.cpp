@@ -2,7 +2,7 @@
 #include "Frame.h"
 #include "parameters.h"
 
-#define DEBUG
+// #define DEBUG
 
 using namespace std;
 
@@ -16,7 +16,10 @@ Frame::Frame(int w, int h, char border, char fill)
 
 void Frame::draw(Canvas &c, int x, int y)
 {
-    cout << "Drawing frame at (" <<x << ", " << y << ") " << width << "x" << height << endl;
+    #ifdef DEBUG
+        cout << "Drawing frame at (" <<x << ", " << y << ") " << width << "x" << height << endl;
+    #endif
+
     if(x>=SCREEN_WIDTH) return;
     if(y>=SCREEN_HEIGHT) return;
 
