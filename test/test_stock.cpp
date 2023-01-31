@@ -29,3 +29,16 @@ TEST(StockTest, CanDefinePriceRange)
     Stock s("Wheat", 42.0);
     s.setPriceRange(100, 200);
 }
+
+/**********************
+ * updatePrice() 
+***********************/
+TEST(StockTest, UpdatedPriceIsTheSameIfNoRangeDefined)
+{
+    constexpr float INITIAL_PRICE = 42.0;
+    Stock s("Wheat", INITIAL_PRICE);
+
+    s.updatePrice();
+
+    ASSERT_EQ(INITIAL_PRICE, s.getPrice());
+}

@@ -14,4 +14,5 @@ class Item
     std::string getName() {return name;};
     float getPrice() {return price;};
     void setPriceRange(float pmin, float pmax);
+    virtual void updatePrice(void);
 };
