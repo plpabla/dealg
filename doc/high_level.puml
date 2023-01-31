@@ -2,7 +2,7 @@
 class System
 {
     - GenericWindow windows[]
-    - GenericWindow current_window
+    - GenericWindow* currentWindow
     - Canvas c
     + draw() // loop over windows and next calls c.render()
     + keyboard_handler()
@@ -40,14 +40,18 @@ abstract Item
 {
     - String name
     - float price
-    + {abstract} update()
-    + {abstract} randomize()
+    - float price_min
+    - float price_max
+    + getPrice()
+    + getName()
+    + setPriceRange()
+    + updatePrice()
 }
 class Stock
 {
     - int quantity
-    + get_price()
-    + get_qty()
+    + getQty()
+    + setQty()
     + buy(int n)
     + sell(int n)
 }
