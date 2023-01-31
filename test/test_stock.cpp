@@ -17,3 +17,9 @@ TEST(StockTest, CanAccessItemNameAndPrice)
     ASSERT_TRUE(s.getName()=="Wheat");
     ASSERT_FLOAT_EQ(42.0, s.getPrice());
 }
+
+TEST(StockTest, CanAccessItemQty)
+{
+    Stock s("Wheat", 42.0, 100);
+    ASSERT_EQ(100, s.getQty());
+}
