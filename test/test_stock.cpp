@@ -49,7 +49,7 @@ TEST(StockTest, UpdatedPriceGeneratesPricesInGivenRange)
 {
     constexpr float MIN_PRICE = 100.0;
     constexpr float MAX_PRICE = 200.0;
-    constexpr int NO_OF_TESTS = 10;
+    constexpr int NO_OF_TESTS = 100;
     std::vector<float> results(NO_OF_TESTS);
     Stock s("Test", MIN_PRICE);
     s.setPriceRange(MIN_PRICE, MAX_PRICE);
@@ -67,5 +67,5 @@ TEST(StockTest, UpdatedPriceGeneratesPricesInGivenRange)
 
     ASSERT_TRUE(min>=MIN_PRICE);
     ASSERT_TRUE(max<=MAX_PRICE);
-    ASSERT_TRUE(range >= (0.9*(MAX_PRICE-MIN_PRICE))) << "Actual range: " << min << "-" << max;
+    ASSERT_TRUE(range >= (0.95*(MAX_PRICE-MIN_PRICE))) << "Actual range: " << min << "-" << max;
 }

@@ -8,5 +8,6 @@ void Item::setPriceRange(float pmin, float pmax)
 
 void Item::updatePrice(void)
 {
-    
+    float range = price_max-price_min;
+    price = price_min + static_cast <float> (rand()) /( static_cast <float> (RAND_MAX/(range)));
 }
