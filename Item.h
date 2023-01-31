@@ -9,6 +9,6 @@ class Item
     public:
     Item(std::string name="", float price=0.0): name(name), price(price) {};
 
-    virtual std::string getName() {return name;};
-    virtual float getPrice() {return price;};
+    std::string getName() {return name;};
+    float getPrice() {return price;};
 };
