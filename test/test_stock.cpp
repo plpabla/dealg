@@ -1,4 +1,6 @@
 #include <gtest/gtest.h>
+#include <vector>
+#include <algorithm>
 #include "../parameters.h"
 #include "../Stock.h"
 
@@ -41,4 +43,29 @@ TEST(StockTest, UpdatedPriceIsTheSameIfNoRangeDefined)
     s.updatePrice();
 
     ASSERT_EQ(INITIAL_PRICE, s.getPrice());
+}
+
+TEST(StockTest, UpdatedPriceGeneratesPricesInGivenRange)
+{
+    constexpr float MIN_PRICE = 100.0;
+    constexpr float MAX_PRICE = 200.0;
+    constexpr int NO_OF_TESTS = 10;
+    std::vector<float> results(NO_OF_TESTS);
+    Stock s("Test", MIN_PRICE);
+    s.setPriceRange(MIN_PRICE, MAX_PRICE);
+
+    for(int cnt=0; cnt<NO_OF_TESTS; cnt++)
+    {
+        s.updatePrice();
+        results[cnt] = s.getPrice();
+    }
+
+    auto it = std::minmax_element(results.begin(), results.end());
+    float min = *it.first;
+    float max = *it.second;  
+    float range = max - min;  
+
+    ASSERT_TRUE(min>=MIN_PRICE);
+    ASSERT_TRUE(max<=MAX_PRICE);
+    ASSERT_TRUE(range >= (0.9*(MAX_PRICE-MIN_PRICE))) << "Actual range: " << min << "-" << max;
 }
