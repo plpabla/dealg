@@ -23,3 +23,9 @@ TEST(StockTest, CanAccessItemQty)
     Stock s("Wheat", 42.0, 100);
     ASSERT_EQ(100, s.getQty());
 }
+
+TEST(StockTest, CanDefinePriceRange)
+{
+    Stock s("Wheat", 42.0);
+    s.setPriceRange(100, 200);
+}
