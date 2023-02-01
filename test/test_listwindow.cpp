@@ -1,8 +1,9 @@
 #include <gtest/gtest.h>
+#include "../ListWindow.h"
 
 using namespace std;
 
-TEST(ListWindowTest, Dummy)
+TEST(ListWindowTest, CanCreateListOfObjects)
 {
-    ASSERT_TRUE(1);
+    ListWindow lw;
 }
