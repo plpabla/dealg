@@ -1,17 +1,24 @@
 #include <gtest/gtest.h>
 #include "../ListWindow.h"
 #include "../Stock.h"
+#include "../Exceptions.h"
 
 using namespace std;
 
+TEST(ListWindowTest, GettingCurrentItemFromEmptyListThrowsError)
+{
+    ListWindow<Stock> lw;
+
+    Stock item;
+    ASSERT_THROW(item = lw.getCurrentItem(), EmptyListException);
+}
+
 TEST(ListWindowTest, CanCreateListOfObjects)
 {
-    ListWindow lw;
-    Stock *s1 = new Stock("Wheat");
-
+    ListWindow<Stock> lw;
+    Stock s1 = Stock("Wheat");
     lw.add(s1);
-    Stock *current = dynamic_cast<Stock*>(lw.getCurrentItem());
+    Stock current = lw.getCurrentItem();
 
-    ASSERT_EQ(s1, current);
-    delete s1;
+    ASSERT_TRUE(s1==current);
 }
