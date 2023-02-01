@@ -28,9 +28,12 @@ class PopupWindow
 class Frame
 class ListWindow
 {
-    - Item items[]
+    - vector<Item> items[]
     - Item* current_item
-    + {abstract} navigate()
+    + {abstract} navigate(char)
+    + add(Item)
+    + removeAll()
+    + Item* getCurrentItem()
 }
 Frame <|-- ListWindow
 Frame <|-- PopupWindow
