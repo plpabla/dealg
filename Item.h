@@ -1,3 +1,4 @@
+#pragma once
 #include <string>
 
 class Item
@@ -10,7 +11,8 @@ class Item
     public:
     Item(std::string name="", float price=0.0): 
         name(name), price(price), price_min(price), price_max(price) {};
-
+    virtual ~Item() {};
+    
     std::string getName() {return name;};
     float getPrice() {return price;};
     void setPriceRange(float pmin, float pmax);

@@ -1,4 +1,6 @@
+#pragma once
 #include <string>
+#include <iostream>
 #include "Item.h"
 
 class Stock: public Item
@@ -7,6 +9,7 @@ class Stock: public Item
     int quantity;
     public:
     Stock(std::string name="", float price=0.0, int qty=0): Item(name, price), quantity(qty) {};
+    ~Stock() override {std::cout<<"Bye...\n";};
 
     int getQty() {return quantity;};
 };

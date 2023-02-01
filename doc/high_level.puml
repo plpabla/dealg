@@ -31,7 +31,7 @@ class ListWindow
     - vector<Item> items[]
     - Item* current_item
     + {abstract} navigate(char)
-    + add(Item)
+    + add(Item*)
     + removeAll()
     + Item* getCurrentItem()
 }
