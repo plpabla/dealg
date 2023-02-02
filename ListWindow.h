@@ -7,7 +7,7 @@ class ListWindow
 {
     protected:
     std::vector<Item_T> items;
-    Item_T current_item;
+    Item_T* current_item = nullptr;
 
     public:
     ListWindow() {};
@@ -16,28 +16,18 @@ class ListWindow
     void navigate(char c) {};   //TODO
     void add(Item_T i);         //TODO: Consider refactoring to operator+
     void removeAll(void) {};    //TODO
-    Item_T getCurrentItem(void); 
+    Item_T* getCurrentItem(void); 
 };
 
 template<typename Item_T> 
 void ListWindow<Item_T>::add(Item_T i)
 {
     items.push_back(i);
+    current_item = &items[items.size()-1];
 }
 
 template<typename Item_T> 
-Item_T ListWindow<Item_T>::getCurrentItem(void)
+Item_T* ListWindow<Item_T>::getCurrentItem(void)
 {
-    if(items.size())
-    {
-        return items[0];
-    }
-    throw EmptyListException();
-}
-
-template<typename Item_T> 
-inline bool operator==(const Item_T &lhs, const Item_T &rhs)
-{
-    // TODO: Make it idiot-proof (compare with no-class member)
-    return lhs.getName() == rhs.getName();
+    return (items.size() ? current_item : nullptr);
 }
