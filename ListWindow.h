@@ -15,7 +15,11 @@ class ListWindow
 
     void navigate(char c) {};   //TODO
     void add(Item_T i);         //TODO: Consider refactoring to operator+
-    void removeAll(void) {};    //TODO
+    void removeAll(void) 
+    { 
+        items.clear(); 
+        current_item=nullptr;
+    };    
     Item_T* getCurrentItem(void); 
     int getNumberOfElements(void) {return items.size();};
 };
