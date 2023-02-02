@@ -1,15 +1,17 @@
 #pragma once
 #include <vector>
+#include "Frame.h"
 
 template<typename Item_T> 
-class ListWindow
+class ListWindow : public Frame
 {
     protected:
     std::vector<Item_T> items;
     Item_T* current_item = nullptr;
 
     public:
-    ListWindow() {};
+    ListWindow(int w=SCREEN_WIDTH, int h=SCREEN_HEIGHT, char border='X', char fill=' '): 
+        Frame(w, h, border, fill) {};
     virtual ~ListWindow() {};
 
     void navigate(char c) {};   //TODO

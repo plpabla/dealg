@@ -1,6 +1,8 @@
 #include <gtest/gtest.h>
 #include "../ListWindow.h"
 #include "../Stock.h"
+#include "../Canvas.h"
+#include "../parameters.h"
 
 using namespace std;
 
@@ -117,4 +119,18 @@ TEST(ListWindowTest, AfterCleanupCurrentItemIsNullThenAfterAddIsNotNull)
 
     ASSERT_NE(lw.getCurrentItem(), nullptr);
     ASSERT_EQ(lw.getCurrentItem()->getName(), "Test new");
+}
+
+/***********************
+ * Drawing
+ **********************/
+TEST(ListWindowTest, CanInitializeAsFrame)
+{
+    ListWindow<Stock> lw(SCREEN_WIDTH, SCREEN_HEIGHT, 'x', '.');
+}
+
+TEST(ListWindowTest, ListIsDrawnWithAGivenBorder)
+{
+    ListWindow<Stock> lw(6, 4, 'x', '.');
+    ASSERT_TRUE(0) << "TODO!";
 }
