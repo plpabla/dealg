@@ -17,13 +17,14 @@ class ListWindow
     void add(Item_T i);         //TODO: Consider refactoring to operator+
     void removeAll(void) {};    //TODO
     Item_T* getCurrentItem(void); 
+    int getNumberOfElements(void) {return items.size();};
 };
 
 template<typename Item_T> 
 void ListWindow<Item_T>::add(Item_T i)
 {
     items.push_back(i);
-    current_item = &items[items.size()-1];
+    current_item = &items[0];
 }
 
 template<typename Item_T> 
