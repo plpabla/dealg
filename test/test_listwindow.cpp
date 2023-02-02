@@ -1,7 +1,6 @@
 #include <gtest/gtest.h>
 #include "../ListWindow.h"
 #include "../Stock.h"
-#include "../Exceptions.h"
 
 using namespace std;
 
