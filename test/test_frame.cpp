@@ -1,21 +1,10 @@
 #include <gtest/gtest.h>
+#include "test_helpers.h"
 #include "../Canvas.h"
 #include "../Frame.h"
 #include "../parameters.h"
 
 using namespace std;
-
-/************************
- * Canvas helpers
-*************************/
-void CompareStringParts(string expected, const Canvas c, int col, int row, string extra_msg="")
-{
-    string part = c.canvas[row].substr(col, expected.length());
-    ASSERT_TRUE(expected == part) 
-        << expected << " != " << part << endl 
-        << "[" << c.canvas[row] << "]" 
-        << " (row " <<row << ", " << extra_msg << ")" << endl;
-}
 
 /************************
  * Frame init
