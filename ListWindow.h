@@ -46,12 +46,11 @@ void ListWindow<Item_T>::draw(Canvas &c, int x, int y)
     constexpr int Y_OFFSET = 1; 
 
     Frame::draw(c, x, y);
+    std::string line;
     for(int cnt=0; cnt<items.size(); cnt++)
     {
         int current_row = y+cnt+Y_OFFSET;
-        c.canvas[current_row][x+X_OFFSET] = '>';
-        // TODO!!
+        line = "> " + items[cnt].getName();
+        c.canvas[current_row].replace(x+X_OFFSET, line.length(), line);
     }
 }
-
-// drawing: c.canvas[row][col] = (border_point ? border_ch : fill_ch);
