@@ -1,4 +1,5 @@
 #include <gtest/gtest.h>
+#include "test_helpers.h"
 #include "../ListWindow.h"
 #include "../Stock.h"
 #include "../Canvas.h"
@@ -129,8 +130,19 @@ TEST(ListWindowTest, CanInitializeAsFrame)
     ListWindow<Stock> lw(SCREEN_WIDTH, SCREEN_HEIGHT, 'x', '.');
 }
 
-TEST(ListWindowTest, ListIsDrawnWithAGivenBorder)
+TEST(ListWindowTest, EmptyListIsDrawnAsEmptyFrame)
 {
     ListWindow<Stock> lw(6, 4, 'x', '.');
-    ASSERT_TRUE(0) << "TODO!";
+    Canvas c(' ');
+    lw.draw(c, 2, 1);
+    CompareStringParts("          ", c, 0, 0);
+    CompareStringParts("  xxxxxx  ", c, 0, 1);
+    CompareStringParts("  x....x  ", c, 0, 2);
+    CompareStringParts("  x....x  ", c, 0, 3);
+    CompareStringParts("  xxxxxx  ", c, 0, 4);
+    CompareStringParts("          ", c, 0, 5);
 }
+
+
+
+    
