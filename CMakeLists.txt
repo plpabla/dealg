@@ -18,7 +18,6 @@ add_library(canvas Canvas.cpp)
 add_library(frame Frame.cpp)
 add_library(item Item.cpp) 
 add_library(stock Stock.cpp)
-# add_library(test_helpers test/test_helpers.cpp)
 
 add_executable(runTests 
   test/tests.cpp 
@@ -31,7 +30,6 @@ add_executable(runTests
 
 target_link_libraries(runTests 
   GTest::gtest_main 
-  # test_helpers
   frame 
   canvas 
   item 
