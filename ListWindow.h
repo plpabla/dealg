@@ -23,6 +23,7 @@ class ListWindow : public Frame
     };    
     Item_T* getCurrentItem(void); 
     int getNumberOfElements(void) {return items.size();};
+    void draw(Canvas &c, int x, int y) override;
 };
 
 template<typename Item_T> 
@@ -37,3 +38,20 @@ Item_T* ListWindow<Item_T>::getCurrentItem(void)
 {
     return (items.size() ? current_item : nullptr);
 }
+
+template<typename Item_T> 
+void ListWindow<Item_T>::draw(Canvas &c, int x, int y)
+{
+    constexpr int X_OFFSET = 1; 
+    constexpr int Y_OFFSET = 1; 
+
+    Frame::draw(c, x, y);
+    for(int cnt=0; cnt<items.size(); cnt++)
+    {
+        int current_row = y+cnt+Y_OFFSET;
+        c.canvas[current_row][x+X_OFFSET] = '>';
+        // TODO!!
+    }
+}
+
+// drawing: c.canvas[row][col] = (border_point ? border_ch : fill_ch);
