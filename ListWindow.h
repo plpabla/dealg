@@ -2,6 +2,7 @@
 #include <vector>
 #include "Frame.h"
 
+
 template<typename Item_T> 
 class ListWindow : public Frame
 {
@@ -39,18 +40,24 @@ Item_T* ListWindow<Item_T>::getCurrentItem(void)
     return (items.size() ? current_item : nullptr);
 }
 
+
 template<typename Item_T> 
 void ListWindow<Item_T>::draw(Canvas &c, int x, int y)
 {
     constexpr int X_OFFSET = 1; 
     constexpr int Y_OFFSET = 1; 
+    const int MAX_LEN = this->width - 2;
 
     Frame::draw(c, x, y);
     std::string line;
     for(int cnt=0; cnt<items.size(); cnt++)
     {
-        int current_row = y+cnt+Y_OFFSET;
+        // Create line with MAX_LEN
+        int current_row = y+cnt+Y_OFFSET;    
         line = "> " + items[cnt].getName();
+        line = line.substr(0, MAX_LEN);
+
+        //
         c.canvas[current_row].replace(x+X_OFFSET, line.length(), line);
     }
 }

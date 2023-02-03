@@ -157,5 +157,16 @@ TEST(ListWindowTest, ListWithOneItemDrawnCorrectly)
     CompareStringParts("              ", c, 0, 5);
 }
 
-
-    
+TEST(ListWindowTest, WhenItemIsTooLongItIsCut)
+{
+    ListWindow<Stock> lw(10, 4, 'x', '.');
+    lw.add(Stock("LongerItemName"));
+    Canvas c(' ');
+    lw.draw(c, 2, 1);
+    CompareStringParts("              ", c, 0, 0);
+    CompareStringParts("  xxxxxxxxxx  ", c, 0, 1);
+    CompareStringParts("  x> Longerx  ", c, 0, 2);
+    CompareStringParts("  x........x  ", c, 0, 3);
+    CompareStringParts("  xxxxxxxxxx  ", c, 0, 4);
+    CompareStringParts("              ", c, 0, 5);
+}
