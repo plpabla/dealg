@@ -47,17 +47,20 @@ void ListWindow<Item_T>::draw(Canvas &c, int x, int y)
     constexpr int X_OFFSET = 1; 
     constexpr int Y_OFFSET = 1; 
     const int MAX_LEN = this->width - 2;
+    const std::string SELECTED = "> ";
+    const std::string NOT_SELECTED = "  ";
 
     Frame::draw(c, x, y);
     std::string line;
     for(int cnt=0; cnt<items.size(); cnt++)
     {
+        int current_row = y+cnt+Y_OFFSET;
+
         // Create line with MAX_LEN
-        int current_row = y+cnt+Y_OFFSET;    
-        line = "> " + items[cnt].getName();
+        line = SELECTED + items[cnt].getName();
         line = line.substr(0, MAX_LEN);
 
-        //
+        // draw
         c.canvas[current_row].replace(x+X_OFFSET, line.length(), line);
     }
 }
