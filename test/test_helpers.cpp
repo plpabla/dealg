@@ -1,3 +1,4 @@
+#include <gtest/gtest.h>
 #include "test_helpers.h"
 
 void CompareStringParts(std::string expected, const Canvas c, int col, int row, std::string extra_msg)
