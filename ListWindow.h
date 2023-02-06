@@ -47,6 +47,7 @@ void ListWindow<Item_T>::draw(Canvas &c, int x, int y)
     constexpr int X_OFFSET = 1; 
     constexpr int Y_OFFSET = 1; 
     const int MAX_LEN = this->width - 2;
+    const int MAX_ITEMS = this->height - 2;
     const std::string SELECTED = "> ";
     const std::string NOT_SELECTED = "  ";
 
@@ -54,6 +55,7 @@ void ListWindow<Item_T>::draw(Canvas &c, int x, int y)
     std::string line;
     for(int cnt=0; cnt<items.size(); cnt++)
     {
+        if(cnt>=MAX_ITEMS) break;
         int current_row = y+cnt+Y_OFFSET;
 
         // Create line with MAX_LEN
