@@ -44,7 +44,15 @@ Item_T* ListWindow<Item_T>::getCurrentItem(void)
 template<typename Item_T> 
 void ListWindow<Item_T>::navigate(TKey k)
 {
-    current_item_idx++;
+    switch(k)
+    {
+    case TKey::KEY_UP:
+        current_item_idx--;
+        break;
+    case TKey::KEY_DOWN:
+        current_item_idx++;
+        break;
+    }
 }
 
 template<typename Item_T> 
