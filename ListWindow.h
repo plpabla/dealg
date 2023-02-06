@@ -1,6 +1,7 @@
 #pragma once
 #include <vector>
 #include "Frame.h"
+#include "Keys.h"
 
 
 template<typename Item_T> 
@@ -15,7 +16,7 @@ class ListWindow : public Frame
         Frame(w, h, border, fill) {};
     virtual ~ListWindow() {};
 
-    void navigate(char c) {};   //TODO
+    void navigate(TKey k);
     void add(Item_T i);         //TODO: Consider refactoring to operator+
     void removeAll(void) 
     { 
@@ -40,6 +41,11 @@ Item_T* ListWindow<Item_T>::getCurrentItem(void)
     return (items.size() ? (&items[current_item_idx]) : nullptr);
 }
 
+template<typename Item_T> 
+void ListWindow<Item_T>::navigate(TKey k)
+{
+    current_item_idx++;
+}
 
 template<typename Item_T> 
 void ListWindow<Item_T>::draw(Canvas &c, int x, int y)
@@ -65,4 +71,4 @@ void ListWindow<Item_T>::draw(Canvas &c, int x, int y)
         // draw
         c.canvas[current_row].replace(x+X_OFFSET, line.length(), line);
     }
-}
+};
