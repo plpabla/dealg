@@ -8,7 +8,7 @@ class ListWindow : public Frame
 {
     protected:
     std::vector<Item_T> items;
-    Item_T* current_item = nullptr;
+    int current_item_idx = 0;
 
     public:
     ListWindow(int w=SCREEN_WIDTH, int h=SCREEN_HEIGHT, char border='X', char fill=' '): 
@@ -20,7 +20,7 @@ class ListWindow : public Frame
     void removeAll(void) 
     { 
         items.clear(); 
-        current_item=nullptr;
+        current_item_idx=0;
     };    
     Item_T* getCurrentItem(void); 
     int getNumberOfElements(void) {return items.size();};
@@ -31,13 +31,13 @@ template<typename Item_T>
 void ListWindow<Item_T>::add(Item_T i)
 {
     items.push_back(i);
-    current_item = &items[0];
+    current_item_idx = 0;
 }
 
 template<typename Item_T> 
 Item_T* ListWindow<Item_T>::getCurrentItem(void)
 {
-    return (items.size() ? current_item : nullptr);
+    return (items.size() ? (&items[current_item_idx]) : nullptr);
 }
 
 
