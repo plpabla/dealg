@@ -57,7 +57,7 @@ void ListWindow<Item_T>::draw(Canvas &c, int x, int y)
         int current_row = y+cnt+Y_OFFSET;
 
         // Create line with MAX_LEN
-        line = SELECTED + items[cnt].getName();
+        line = ((cnt==current_item_idx) ? SELECTED:NOT_SELECTED) + items[cnt].getName();
         line = line.substr(0, MAX_LEN);
 
         // draw
