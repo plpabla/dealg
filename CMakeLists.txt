@@ -14,6 +14,9 @@ FetchContent_Declare(
 )
 FetchContent_MakeAvailable(googletest)
 
+find_package(Curses REQUIRED)
+include_directories(${CURSES_INCLUDE_DIR})
+
 add_library(canvas Canvas.cpp) 
 add_library(frame Frame.cpp)
 add_library(item Item.cpp) 
@@ -34,6 +37,7 @@ target_link_libraries(runTests
   canvas 
   item 
   stock
+  ${CURSES_LIBRARIES}
 )
 
 include(GoogleTest)
@@ -41,4 +45,10 @@ gtest_discover_tests(runTests)
 
 # Prepare also main
 add_executable(${PROJECT_NAME} main.cpp)
-target_link_libraries(${PROJECT_NAME} frame canvas item stock)
+target_link_libraries(${PROJECT_NAME} 
+  frame 
+  canvas 
+  item 
+  stock
+  ${CURSES_LIBRARIES})
+

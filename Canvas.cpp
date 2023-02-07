@@ -1,21 +1,27 @@
 #include "Canvas.h"
 #include <string>
+#include <ncurses.h>
 
 using namespace std;
 
-Canvas::Canvas(char fill)
+Canvas::Canvas(char fill): fill(fill)
 {
-    for(auto & line: canvas)
-    {
-        line = string(SCREEN_WIDTH, fill);
-    }
+    clear();
 }
 
 void Canvas::render(void)
 {
     for(auto line: canvas)
     {
-        cout << line << '\n';
+        line += "\n";
+        printw(line.c_str());
     }
-    cout << flush;
+}
+
+void Canvas::clear(void)
+{
+    for(auto & line: canvas)
+    {
+        line = string(SCREEN_WIDTH, fill);
+    }
 }

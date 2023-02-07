@@ -10,4 +10,8 @@ struct Canvas
 
     Canvas(char fill=' ');
     void render(void);
+    void clear(void);
+
+    private:
+    char fill = ' ';
 };

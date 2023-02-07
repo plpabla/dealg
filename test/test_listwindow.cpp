@@ -4,7 +4,6 @@
 #include "../Stock.h"
 #include "../Canvas.h"
 #include "../parameters.h"
-#include "../Keys.h"
 
 using namespace std;
 
@@ -208,7 +207,7 @@ TEST(ListWindowTest, CursorOnPositionDifferntThanOneIsDisplayedCorrectly)
     ListWindow<Stock> lw(10, 4, 'x', '.');
     lw.add(Stock("Item1"));
     lw.add(Stock("Item B"));
-    lw.navigate(TKey::KEY_DOWN);
+    lw.navigate(1);
     Canvas c(' ');
     lw.draw(c, 2, 1);
     CompareStringParts("              ", c, 0, 0);
