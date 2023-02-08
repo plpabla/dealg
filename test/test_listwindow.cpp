@@ -146,16 +146,16 @@ TEST(ListWindowTest, EmptyListIsDrawnAsEmptyFrame)
 
 TEST(ListWindowTest, ListWithOneItemDrawnCorrectly)
 {
-    ListWindow<Stock> lw(10, 4, 'x', '.');
+    ListWindow<Stock> lw(20, 4, 'x', '.');
     lw.add(Stock("Item1"));
     Canvas c(' ');
     lw.draw(c, 2, 1);
-    CompareStringParts("              ", c, 0, 0);
-    CompareStringParts("  xxxxxxxxxx  ", c, 0, 1);
-    CompareStringParts("  x> Item1.x  ", c, 0, 2);
-    CompareStringParts("  x........x  ", c, 0, 3);
-    CompareStringParts("  xxxxxxxxxx  ", c, 0, 4);
-    CompareStringParts("              ", c, 0, 5);
+    CompareStringParts("                        ", c, 0, 0);
+    CompareStringParts("  xxxxxxxxxxxxxxxxxxxx  ", c, 0, 1);
+    CompareStringParts("  x> Item1......0.00 x  ", c, 0, 2);
+    CompareStringParts("  x..................x  ", c, 0, 3);
+    CompareStringParts("  xxxxxxxxxxxxxxxxxxxx  ", c, 0, 4);
+    CompareStringParts("                        ", c, 0, 5);
 }
 
 TEST(ListWindowTest, WhenItemIsTooLongItIsCut)
@@ -166,7 +166,7 @@ TEST(ListWindowTest, WhenItemIsTooLongItIsCut)
     lw.draw(c, 2, 1);
     CompareStringParts("              ", c, 0, 0);
     CompareStringParts("  xxxxxxxxxx  ", c, 0, 1);
-    CompareStringParts("  x> Longerx  ", c, 0, 2);
+    CompareStringParts("  x> L0.00 x  ", c, 0, 2);
     CompareStringParts("  x........x  ", c, 0, 3);
     CompareStringParts("  xxxxxxxxxx  ", c, 0, 4);
     CompareStringParts("              ", c, 0, 5);
@@ -174,80 +174,95 @@ TEST(ListWindowTest, WhenItemIsTooLongItIsCut)
 
 TEST(ListWindowTest, ListWithTwoItemsDrawnCorrectly)
 {
-    ListWindow<Stock> lw(10, 4, 'x', '.');
+    ListWindow<Stock> lw(20, 4, 'x', '.');
     lw.add(Stock("Item1"));
     lw.add(Stock("Item B"));
     Canvas c(' ');
     lw.draw(c, 2, 1);
-    CompareStringParts("              ", c, 0, 0);
-    CompareStringParts("  xxxxxxxxxx  ", c, 0, 1);
-    CompareStringParts("  x> Item1.x  ", c, 0, 2);
-    CompareStringParts("  x  Item Bx  ", c, 0, 3);
-    CompareStringParts("  xxxxxxxxxx  ", c, 0, 4);
-    CompareStringParts("              ", c, 0, 5);
+    CompareStringParts("                        ", c, 0, 0);
+    CompareStringParts("  xxxxxxxxxxxxxxxxxxxx  ", c, 0, 1);
+    CompareStringParts("  x> Item1......0.00 x  ", c, 0, 2);
+    CompareStringParts("  x  Item B.....0.00 x  ", c, 0, 3);
+    CompareStringParts("  xxxxxxxxxxxxxxxxxxxx  ", c, 0, 4);
+    CompareStringParts("                        ", c, 0, 5);
 }
 
 TEST(ListWindowTest, ForMoreItemsThanSizeCroppedListIsDrawn)
 {
-    ListWindow<Stock> lw(10, 4, 'x', '.');
+    ListWindow<Stock> lw(20, 4, 'x', '.');
     lw.add(Stock("Item1"));
     lw.add(Stock("Item B"));
     lw.add(Stock("Should be not displayed"));
     Canvas c(' ');
     lw.draw(c, 2, 1);
-    CompareStringParts("              ", c, 0, 0);
-    CompareStringParts("  xxxxxxxxxx  ", c, 0, 1);
-    CompareStringParts("  x> Item1.x  ", c, 0, 2);
-    CompareStringParts("  x  Item Bx  ", c, 0, 3);
-    CompareStringParts("  xxxxxxxxxx  ", c, 0, 4);
-    CompareStringParts("              ", c, 0, 5);
+    CompareStringParts("                        ", c, 0, 0);
+    CompareStringParts("  xxxxxxxxxxxxxxxxxxxx  ", c, 0, 1);
+    CompareStringParts("  x> Item1......0.00 x  ", c, 0, 2);
+    CompareStringParts("  x  Item B.....0.00 x  ", c, 0, 3);
+    CompareStringParts("  xxxxxxxxxxxxxxxxxxxx  ", c, 0, 4);
+    CompareStringParts("                        ", c, 0, 5);
 }
 
 TEST(ListWindowTest, CursorOnPositionDifferntThanOneIsDisplayedCorrectly)
 {
-    ListWindow<Stock> lw(10, 4, 'x', '.');
+    ListWindow<Stock> lw(20, 4, 'x', '.');
     lw.add(Stock("Item1"));
     lw.add(Stock("Item B"));
     lw.navigate(KEY_DOWN);
     Canvas c(' ');
     lw.draw(c, 2, 1);
-    CompareStringParts("              ", c, 0, 0);
-    CompareStringParts("  xxxxxxxxxx  ", c, 0, 1);
-    CompareStringParts("  x  Item1.x  ", c, 0, 2);
-    CompareStringParts("  x> Item Bx  ", c, 0, 3);
-    CompareStringParts("  xxxxxxxxxx  ", c, 0, 4);
-    CompareStringParts("              ", c, 0, 5);
+    CompareStringParts("                        ", c, 0, 0);
+    CompareStringParts("  xxxxxxxxxxxxxxxxxxxx  ", c, 0, 1);
+    CompareStringParts("  x  Item1......0.00 x  ", c, 0, 2);
+    CompareStringParts("  x> Item B.....0.00 x  ", c, 0, 3);
+    CompareStringParts("  xxxxxxxxxxxxxxxxxxxx  ", c, 0, 4);
+    CompareStringParts("                        ", c, 0, 5);
 }
 
 TEST(ListWindowTest, CannotNavigateOver)
 {
-    ListWindow<Stock> lw(10, 4, 'x', '.');
+    ListWindow<Stock> lw(20, 4, 'x', '.');
     lw.add(Stock("Item1"));
     lw.add(Stock("Item B"));
     lw.navigate(KEY_UP);
     Canvas c(' ');
     lw.draw(c, 2, 1);
-    CompareStringParts("              ", c, 0, 0);
-    CompareStringParts("  xxxxxxxxxx  ", c, 0, 1);
-    CompareStringParts("  x> Item1.x  ", c, 0, 2);
-    CompareStringParts("  x  Item Bx  ", c, 0, 3);
-    CompareStringParts("  xxxxxxxxxx  ", c, 0, 4);
-    CompareStringParts("              ", c, 0, 5);
+    CompareStringParts("                        ", c, 0, 0);
+    CompareStringParts("  xxxxxxxxxxxxxxxxxxxx  ", c, 0, 1);
+    CompareStringParts("  x> Item1......0.00 x  ", c, 0, 2);
+    CompareStringParts("  x  Item B.....0.00 x  ", c, 0, 3);
+    CompareStringParts("  xxxxxxxxxxxxxxxxxxxx  ", c, 0, 4);
+    CompareStringParts("                        ", c, 0, 5);
 }
 
 TEST(ListWindowTest, CannotNavigateUnder)
 {
-    ListWindow<Stock> lw(10, 4, 'x', '.');
+    ListWindow<Stock> lw(20, 4, 'x', '.');
     lw.add(Stock("Item1"));
     lw.add(Stock("Item B"));
     lw.navigate(KEY_DOWN);
     lw.navigate(KEY_DOWN);
     Canvas c(' ');
     lw.draw(c, 2, 1);
-    CompareStringParts("              ", c, 0, 0);
-    CompareStringParts("  xxxxxxxxxx  ", c, 0, 1);
-    CompareStringParts("  x  Item1.x  ", c, 0, 2);
-    CompareStringParts("  x> Item Bx  ", c, 0, 3);
-    CompareStringParts("  xxxxxxxxxx  ", c, 0, 4);
-    CompareStringParts("              ", c, 0, 5);
+    CompareStringParts("                        ", c, 0, 0);
+    CompareStringParts("  xxxxxxxxxxxxxxxxxxxx  ", c, 0, 1);
+    CompareStringParts("  x  Item1......0.00 x  ", c, 0, 2);
+    CompareStringParts("  x> Item B.....0.00 x  ", c, 0, 3);
+    CompareStringParts("  xxxxxxxxxxxxxxxxxxxx  ", c, 0, 4);
+    CompareStringParts("                        ", c, 0, 5);
+}
+
+TEST(ListWindowTest, DisplayAlsoPrices)
+{
+    ListWindow<Stock> lw(24, 4, 'x', '.');
+    lw.add(Stock("Item1", 20.401, 100));
+    lw.add(Stock("Item B", 145.00, 600));
+    Canvas c(' ');
+    lw.draw(c, 2, 1);
+    CompareStringParts("                            ", c, 0, 0);
+    CompareStringParts("  xxxxxxxxxxxxxxxxxxxxxxxx  ", c, 0, 1);
+    CompareStringParts("  x> Item1.........20.40 x  ", c, 0, 2);
+    CompareStringParts("  x  Item B.......145.00 x  ", c, 0, 3);
+    CompareStringParts("  xxxxxxxxxxxxxxxxxxxxxxxx  ", c, 0, 4);
+    CompareStringParts("                            ", c, 0, 5);
 }

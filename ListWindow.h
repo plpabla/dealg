@@ -1,6 +1,9 @@
 #pragma once
 #include <vector>
 #include <ncurses.h>
+#include <iostream>
+#include <sstream>
+#include <iomanip>
 #include "Frame.h"
 
 
@@ -77,7 +80,14 @@ void ListWindow<Item_T>::draw(Canvas &c, int x, int y)
         line = ((cnt==current_item_idx) ? SELECTED:NOT_SELECTED) + items[cnt].getName();
         line = line.substr(0, MAX_LEN);
 
-        // draw
+        // Create a price part
+        std::ostringstream price_txt;
+        price_txt << std::setprecision(2) << std::fixed << items[cnt].getPrice() << " ";
+        int x_offset_price = MAX_LEN-price_txt.str().length()+1;
+
+        // draw - item
         c.canvas[current_row].replace(x+X_OFFSET, line.length(), line);
+        // draw - price
+        c.canvas[current_row].replace(x+x_offset_price, price_txt.str().length(), price_txt.str());
     }
 };
