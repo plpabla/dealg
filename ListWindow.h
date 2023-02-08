@@ -1,5 +1,6 @@
 #pragma once
 #include <vector>
+#include <ncurses.h>
 #include "Frame.h"
 
 
@@ -15,7 +16,7 @@ class ListWindow : public Frame
         Frame(w, h, border, fill) {};
     virtual ~ListWindow() {};
 
-    void navigate(int k);
+    bool navigate(int k);
     void add(Item_T i);         //TODO: Consider refactoring to operator+
     void removeAll(void) 
     { 
@@ -41,17 +42,18 @@ Item_T* ListWindow<Item_T>::getCurrentItem(void)
 }
 
 template<typename Item_T> 
-void ListWindow<Item_T>::navigate(int k)
+bool ListWindow<Item_T>::navigate(int k)
 {
     switch(k)
     {
-    case -1:
-        current_item_idx--;
-        break;
-    case 1:
-        current_item_idx++;
-        break;
+    case KEY_DOWN:
+        if(current_item_idx<(items.size()-1)) current_item_idx++;
+        return true;
+    case KEY_UP:
+        if(current_item_idx>0) current_item_idx--;
+        return true;
     }
+    return false;
 }
 
 template<typename Item_T> 

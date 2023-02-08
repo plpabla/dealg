@@ -1,4 +1,5 @@
 #include <gtest/gtest.h>
+#include <ncurses.h>
 #include "test_helpers.h"
 #include "../ListWindow.h"
 #include "../Stock.h"
@@ -207,7 +208,40 @@ TEST(ListWindowTest, CursorOnPositionDifferntThanOneIsDisplayedCorrectly)
     ListWindow<Stock> lw(10, 4, 'x', '.');
     lw.add(Stock("Item1"));
     lw.add(Stock("Item B"));
-    lw.navigate(1);
+    lw.navigate(KEY_DOWN);
+    Canvas c(' ');
+    lw.draw(c, 2, 1);
+    CompareStringParts("              ", c, 0, 0);
+    CompareStringParts("  xxxxxxxxxx  ", c, 0, 1);
+    CompareStringParts("  x  Item1.x  ", c, 0, 2);
+    CompareStringParts("  x> Item Bx  ", c, 0, 3);
+    CompareStringParts("  xxxxxxxxxx  ", c, 0, 4);
+    CompareStringParts("              ", c, 0, 5);
+}
+
+TEST(ListWindowTest, CannotNavigateOver)
+{
+    ListWindow<Stock> lw(10, 4, 'x', '.');
+    lw.add(Stock("Item1"));
+    lw.add(Stock("Item B"));
+    lw.navigate(KEY_UP);
+    Canvas c(' ');
+    lw.draw(c, 2, 1);
+    CompareStringParts("              ", c, 0, 0);
+    CompareStringParts("  xxxxxxxxxx  ", c, 0, 1);
+    CompareStringParts("  x> Item1.x  ", c, 0, 2);
+    CompareStringParts("  x  Item Bx  ", c, 0, 3);
+    CompareStringParts("  xxxxxxxxxx  ", c, 0, 4);
+    CompareStringParts("              ", c, 0, 5);
+}
+
+TEST(ListWindowTest, CannotNavigateUnder)
+{
+    ListWindow<Stock> lw(10, 4, 'x', '.');
+    lw.add(Stock("Item1"));
+    lw.add(Stock("Item B"));
+    lw.navigate(KEY_DOWN);
+    lw.navigate(KEY_DOWN);
     Canvas c(' ');
     lw.draw(c, 2, 1);
     CompareStringParts("              ", c, 0, 0);

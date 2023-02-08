@@ -29,8 +29,7 @@ int main()
     int ch=0;
     do
     {    
-        if(ch==KEY_UP) lw.navigate(-1);
-        if(ch==KEY_DOWN) lw.navigate(1);
+        lw.navigate(ch);
         clear();
         f0.draw(c, 3, 1);
         f0.draw(c, 7, 2);
