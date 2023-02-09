@@ -266,3 +266,48 @@ TEST(ListWindowTest, DisplayAlsoPrices)
     CompareStringParts("  xxxxxxxxxxxxxxxxxxxxxxxx  ", c, 0, 4);
     CompareStringParts("                            ", c, 0, 5);
 }
+
+TEST(ListWindowTest, DisplayQty)
+{
+    ListWindow<Stock> lw(30, 4, 'x', '.', 4);
+    lw.add(Stock("Item1", 20.401, 100));
+    lw.add(Stock("Item B", 145.00, 60));
+    Canvas c(' ');
+    lw.draw(c, 2, 1);
+    CompareStringParts("                                  ", c, 0, 0);
+    CompareStringParts("  xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx  ", c, 0, 1);
+    CompareStringParts("  x> Item1.........20.40 x 100 x  ", c, 0, 2);
+    CompareStringParts("  x  Item B.......145.00 x  60 x  ", c, 0, 3);
+    CompareStringParts("  xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx  ", c, 0, 4);
+    CompareStringParts("                                  ", c, 0, 5);
+}
+
+TEST(ListWindowTest, DisplayShortQty)
+{
+    ListWindow<Stock> lw(30, 4, 'x', '.', 2);
+    lw.add(Stock("Item1", 20.401, 10));
+    lw.add(Stock("Item B", 145.00, 60));
+    Canvas c(' ');
+    lw.draw(c, 2, 1);
+    CompareStringParts("                                  ", c, 0, 0);
+    CompareStringParts("  xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx  ", c, 0, 1);
+    CompareStringParts("  x> Item1...........20.40 x10 x  ", c, 0, 2);
+    CompareStringParts("  x  Item B.........145.00 x60 x  ", c, 0, 3);
+    CompareStringParts("  xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx  ", c, 0, 4);
+    CompareStringParts("                                  ", c, 0, 5);
+}
+
+TEST(ListWindowTest, LongerQtyIsCut)
+{
+    ListWindow<Stock> lw(30, 4, 'x', '.', 2);
+    lw.add(Stock("Item1", 20.401, 100));
+    lw.add(Stock("Item B", 145.00, 99));
+    Canvas c(' ');
+    lw.draw(c, 2, 1);
+    CompareStringParts("                                  ", c, 0, 0);
+    CompareStringParts("  xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx  ", c, 0, 1);
+    CompareStringParts("  x> Item1...........20.40 x?? x  ", c, 0, 2);
+    CompareStringParts("  x  Item B.........145.00 x99 x  ", c, 0, 3);
+    CompareStringParts("  xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx  ", c, 0, 4);
+    CompareStringParts("                                  ", c, 0, 5);
+}

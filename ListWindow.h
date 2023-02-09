@@ -4,6 +4,7 @@
 #include <iostream>
 #include <sstream>
 #include <iomanip>
+#include <math.h>
 #include "Frame.h"
 
 
@@ -13,10 +14,12 @@ class ListWindow : public Frame
     protected:
     std::vector<Item_T> items;
     int current_item_idx = 0;
+    int qty_digits;
 
     public:
-    ListWindow(int w=SCREEN_WIDTH, int h=SCREEN_HEIGHT, char border='X', char fill=' '): 
-        Frame(w, h, border, fill) {};
+    ListWindow(int w=SCREEN_WIDTH, int h=SCREEN_HEIGHT, 
+        char border='X', char fill=' ', int ditits_for_qty=0): 
+        Frame(w, h, border, fill), qty_digits(ditits_for_qty) {};
     virtual ~ListWindow() {};
 
     bool navigate(int k);
@@ -64,7 +67,7 @@ void ListWindow<Item_T>::draw(Canvas &c, int x, int y)
 {
     constexpr int X_OFFSET = 1; 
     constexpr int Y_OFFSET = 1; 
-    const int MAX_LEN = this->width - 2;
+    const int MAX_LEN = (qty_digits>0)? (this->width-qty_digits-4):(this->width-2);
     const int MAX_ITEMS = this->height - 2;
     const std::string SELECTED = "> ";
     const std::string NOT_SELECTED = "  ";
@@ -79,15 +82,30 @@ void ListWindow<Item_T>::draw(Canvas &c, int x, int y)
         // Create line with MAX_LEN
         line = ((cnt==current_item_idx) ? SELECTED:NOT_SELECTED) + items[cnt].getName();
         line = line.substr(0, MAX_LEN);
+        // draw - item
+        c.canvas[current_row].replace(x+X_OFFSET, line.length(), line);
 
         // Create a price part
         std::ostringstream price_txt;
         price_txt << std::setprecision(2) << std::fixed << items[cnt].getPrice() << " ";
         int x_offset_price = MAX_LEN-price_txt.str().length()+1;
-
-        // draw - item
-        c.canvas[current_row].replace(x+X_OFFSET, line.length(), line);
         // draw - price
         c.canvas[current_row].replace(x+x_offset_price, price_txt.str().length(), price_txt.str());
+
+        // Create quantity part if applicable
+        if(qty_digits)
+        {
+            std::ostringstream qty_txt;
+            int qty=items[cnt].getQty();
+            if(qty<pow(10,qty_digits))
+            {
+                qty_txt << " " << border_ch << std::setw(qty_digits) << qty << " ";
+            } else
+            {
+                qty_txt << " " << border_ch << std::string(qty_digits, '?') << " ";
+            }
+            int x_offset_qty = MAX_LEN;
+            c.canvas[current_row].replace(x+x_offset_qty, qty_txt.str().length(), qty_txt.str());
+        }
     }
 };

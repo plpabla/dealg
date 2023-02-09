@@ -1,5 +1,6 @@
 #! /bin/sh
 
 cd build/ && cmake ..
-make 
-./runTests
+if make; then 
+    ./runTests
+fi
