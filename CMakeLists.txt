@@ -21,6 +21,7 @@ add_library(canvas Canvas.cpp)
 add_library(frame Frame.cpp)
 add_library(item Item.cpp) 
 add_library(stock Stock.cpp)
+add_library(baner Baner.cpp)
 
 add_executable(runTests 
   test/tests.cpp 
@@ -28,6 +29,7 @@ add_executable(runTests
   test/test_frame.cpp 
   test/test_stock.cpp 
   test/test_listwindow.cpp
+  test/test_baner.cpp
   test/test_helpers.cpp
 )
 
@@ -37,6 +39,7 @@ target_link_libraries(runTests
   canvas 
   item 
   stock
+  baner
   ${CURSES_LIBRARIES}
 )
 
@@ -50,5 +53,6 @@ target_link_libraries(${PROJECT_NAME}
   canvas 
   item 
   stock
+  baner
   ${CURSES_LIBRARIES})
 

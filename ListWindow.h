@@ -97,6 +97,7 @@ void ListWindow<Item_T>::draw(Canvas &c, int x, int y)
         {
             std::ostringstream qty_txt;
             int qty=items[cnt].getQty();
+            // Crop too long numbers
             if(qty<pow(10,qty_digits))
             {
                 qty_txt << " " << border_ch << std::setw(qty_digits) << qty << " ";
@@ -105,6 +106,7 @@ void ListWindow<Item_T>::draw(Canvas &c, int x, int y)
                 qty_txt << " " << border_ch << std::string(qty_digits, '?') << " ";
             }
             int x_offset_qty = MAX_LEN;
+            // draw - quantity
             c.canvas[current_row].replace(x+x_offset_qty, qty_txt.str().length(), qty_txt.str());
         }
     }
