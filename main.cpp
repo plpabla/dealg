@@ -5,6 +5,7 @@
 #include "Frame.h"
 #include "ListWindow.h"
 #include "Stock.h"
+#include "Baner.h"
 
 int main()
 {
@@ -15,7 +16,6 @@ int main()
 
 
     Frame f0(16, 4, '*',' ');
-    Frame f1(2,2,'X','X');
 
     Canvas c(' ');
     ListWindow<Stock> lw(30, 10, 'x', '.', 4);
@@ -33,6 +33,8 @@ int main()
     lw2.add(Stock("Item B"));
     lw2.add(Stock("Item C",32, 8));
 
+    Baner b(15, 3, '#', "Hi");
+
     int ch=0;
     do
     {    
@@ -41,9 +43,9 @@ int main()
         f0.draw(c, 3, 1);
         f0.draw(c, 7, 2);
         f0.draw(c, 76, 22);
-        f1.draw(c, 8, 10);
         lw.draw(c, 40, 5);
         lw2.draw(c, 0, 15);
+        b.draw(c, 59, 13);
 
         c.render();
     } while((ch = getch()) != 'q');
