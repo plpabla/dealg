@@ -58,6 +58,7 @@ bool ListWindow<Item_T>::navigate(int k)
     case KEY_UP:
         if(current_item_idx>0) current_item_idx--;
         return true;
+    /* TODO - processing B/S keys */
     }
     return false;
 }

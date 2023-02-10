@@ -29,11 +29,13 @@ class Frame
 class ListWindow
 {
     - vector<Item> items[]
-    - Item* current_item
+    - int current_item_idx
     + {abstract} navigate(char)
     + add(Item*)
     + removeAll()
     + Item* getCurrentItem()
+    + draw(Canvas &c, int x, int y) 
+    + update_prices()
 }
 Frame <|-- ListWindow
 Frame <|-- PopupWindow
