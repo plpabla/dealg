@@ -29,7 +29,16 @@ TEST(StockTest, CanAccessItemQty)
 TEST(StockTest, CanDefinePriceRange)
 {
     Stock s("Wheat", 42.0);
-    s.setPriceRange(100, 200);
+    ASSERT_NO_THROW(s.setPriceRange(100, 200));
+}
+
+TEST(StockTest, CanUsePriceRangeDuringInit)
+{
+    Stock s("Wheat", 42.0, 0, 100.0, 100.0);
+
+    s.updatePrice();
+
+    ASSERT_EQ(s.getPrice(), 100.0);
 }
 
 /**********************
