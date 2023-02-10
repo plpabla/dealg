@@ -35,7 +35,7 @@ class ListWindow
     + removeAll()
     + Item* getCurrentItem()
     + draw(Canvas &c, int x, int y) 
-    + update_prices()
+    + updatePrices()
 }
 Frame <|-- ListWindow
 Frame <|-- PopupWindow

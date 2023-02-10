@@ -318,9 +318,18 @@ TEST(ListWindowTest, LongerQtyIsCut)
 TEST(ListWindowTest, CanUpdteAllPrices)
 {
     ListWindow<Stock> lw(30, 4, 'x', '.', 2);
-    lw.add(Stock("Item 1"));
-    lw.add(Stock("Item B"));
+    lw.add(Stock("Item 1", 10.0, 0, 42.0, 42.0));
+    lw.add(Stock("Item B", 11.0, 0, 69.0, 69.0));
+    // Check initial prices
+    ASSERT_EQ(lw.getCurrentItem()->getPrice(), 10.0);
+    lw.navigate(KEY_DOWN);
+    ASSERT_EQ(lw.getCurrentItem()->getPrice(), 11.0);
+    lw.navigate(KEY_UP);
 
-    // lw.updatePrices();
+    lw.updatePrices();
 
+    ASSERT_EQ(lw.getCurrentItem()->getPrice(), 42.0);
+    lw.navigate(KEY_DOWN);
+    ASSERT_EQ(lw.getCurrentItem()->getPrice(), 69.0);
+    lw.navigate(KEY_UP);
 }

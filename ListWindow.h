@@ -32,6 +32,7 @@ class ListWindow : public Frame
     Item_T* getCurrentItem(void); 
     int getNumberOfElements(void) {return items.size();};
     void draw(Canvas &c, int x, int y) override;
+    void updatePrices(void);
 };
 
 template<typename Item_T> 
@@ -61,6 +62,15 @@ bool ListWindow<Item_T>::navigate(int k)
     /* TODO - processing B/S keys */
     }
     return false;
+}
+
+template<typename Item_T> 
+void ListWindow<Item_T>::updatePrices(void)
+{
+    for(auto & i: items)
+    {
+        i.updatePrice();
+    }
 }
 
 template<typename Item_T> 
