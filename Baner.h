@@ -9,9 +9,8 @@ class Baner: public Frame
     std::string msg;
 
     public:
-    Baner(int w=SCREEN_WIDTH, int h=SCREEN_HEIGHT, 
-        char border='X', std::string msg = "", char fill=' '): 
-        Frame(w, h, border, fill), msg(msg) {};
+    Baner(std::string msg = "", char border='X'): 
+        Frame(msg.length()+4, 3, border, ' '), msg(msg) {};
     virtual ~Baner() {};
 
     void draw(Canvas &c, int x, int y) override;

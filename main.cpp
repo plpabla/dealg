@@ -33,7 +33,7 @@ int main()
     lw2.add(Stock("Item B"));
     lw2.add(Stock("Item C",32, 8));
 
-    Baner b(15, 3, '#', "Hi");
+    Baner b("Hi!!", '#');
 
     int ch=0;
     do
