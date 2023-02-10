@@ -14,38 +14,33 @@ int main()
     keypad(stdscr, TRUE);
     noecho();
 
-
-    Frame f0(16, 4, '*',' ');
+    Baner info_top_assets("                      Assets                         ", '#');
+    Baner info_top_price("   Price  ", '#');
+    Baner info_top_stock("Quantity", '#');
+    Baner info_keys("             [b]uy       [s]ell        [t]ravel        [q]uit               ", ' ');
 
     Canvas c(' ');
-    ListWindow<Stock> lw(30, 10, 'x', '.', 4);
-    lw.add(Stock("Item A"));
-    lw.add(Stock("Item B"));
-    lw.add(Stock("Item C",32, 8));
-    lw.add(Stock("Item D1"));
-    lw.add(Stock("Item D2"));
-    lw.add(Stock("Item E"));
-    lw.add(Stock("Item E2",200,10000));
-    lw.add(Stock("Item E3",150,9999));
-
-    ListWindow<Stock> lw2(30, 10, 'x', '.');
-    lw2.add(Stock("Item A"));
-    lw2.add(Stock("Item B"));
-    lw2.add(Stock("Item C",32, 8));
-
-    Baner b("Hi!!", '#');
+    ListWindow<Stock> assets_window(80, 10, '#', '.', 9);
+    assets_window.add(Stock("Item A"));
+    assets_window.add(Stock("Item B"));
+    assets_window.add(Stock("Item C",32, 8));
+    assets_window.add(Stock("Item D1"));
+    assets_window.add(Stock("Item D2"));
+    assets_window.add(Stock("Item E"));
+    assets_window.add(Stock("Item E2",200,10000));
+    assets_window.add(Stock("Item E3",150,9999));
 
     int ch=0;
     do
     {    
-        lw.navigate(ch);
         clear();
-        f0.draw(c, 3, 1);
-        f0.draw(c, 7, 2);
-        f0.draw(c, 76, 22);
-        lw.draw(c, 40, 5);
-        lw2.draw(c, 0, 15);
-        b.draw(c, 59, 13);
+        assets_window.navigate(ch);
+
+        info_top_assets.draw(c, 0, 0);
+        info_top_price.draw(c, 56, 0);
+        info_top_stock.draw(c, 68, 0);
+        assets_window.draw(c, 0, 2);
+        info_keys.draw(c,0,12);
 
         c.render();
     } while((ch = getch()) != 'q');
