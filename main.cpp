@@ -42,6 +42,8 @@ int main()
         assets_window.draw(c, 0, 2);
         info_keys.draw(c,0,12);
 
+        // Baner budget_window();
+
         c.render();
     } while((ch = getch()) != 'q');
 

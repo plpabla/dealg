@@ -311,3 +311,16 @@ TEST(ListWindowTest, LongerQtyIsCut)
     CompareStringParts("  xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx  ", c, 0, 4);
     CompareStringParts("                                  ", c, 0, 5);
 }
+
+/***********************
+ * Update prices
+ **********************/
+TEST(ListWindowTest, CanUpdteAllPrices)
+{
+    ListWindow<Stock> lw(30, 4, 'x', '.', 2);
+    lw.add(Stock("Item 1"));
+    lw.add(Stock("Item B"));
+
+    // lw.updatePrices();
+
+}
