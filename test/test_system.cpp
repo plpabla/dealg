@@ -1,5 +1,7 @@
 #include <gtest/gtest.h>
 #include <string>
+#include "test_helpers.h"
+
 #include "../parameters.h"
 #include "../System.h"
 #include "../Canvas.h"
@@ -53,3 +55,25 @@ TEST(SystemTest, CanRemoveLastWindow)
     s.removeLastWindow();
     ASSERT_EQ(s.getWindowsCount(), 0);
 }
+
+/******************
+ * Drawing 
+ ******************/
+// TEST(SystemTest, DrawAllWindows)
+// {
+//     System s('.');
+//     Baner b0("Hello",'x');
+//     Baner b1("Hi",'@');
+//     s.addWindow(&b0,2,1);
+//     s.addWindow(&b1,10,2);
+
+//     s.draw();
+
+//     Canvas *pc = s.getCanvas();
+//     CompareStringParts(".....................", *pc, 0, 0);
+//     CompareStringParts("..xxxxxxxxx..........", *pc, 0, 1);
+//     CompareStringParts("..x Hello @@@@@@.....", *pc, 0, 2);
+//     CompareStringParts("..xxxxxxxx@ Hi @.....", *pc, 0, 3);
+//     CompareStringParts("..........@@@@@@.....", *pc, 0, 4);
+//     CompareStringParts(".....................", *pc, 0, 5);
+// }

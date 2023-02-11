@@ -6,6 +6,10 @@
 class System
 {
     protected:
+    struct window_loc
+    {
+        GenericWindow* pw;
+    };
     Canvas *pCanvas;
     std::vector<GenericWindow*> windows;
 
@@ -14,6 +18,7 @@ class System
     ~System(){delete pCanvas; };
     Canvas* getCanvas(void);
     int getWindowsCount(void) {return windows.size();};
-    void addWindow(GenericWindow *w) {windows.push_back(w);};
+    void addWindow(GenericWindow *w, int x=0, int y=0);
     void removeLastWindow(void) {windows.pop_back();};
+    void draw(void);
 };
