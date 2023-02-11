@@ -9,9 +9,12 @@ class System
     struct window_loc
     {
         GenericWindow* pw;
+        int x = 0;
+        int y = 0;
+        window_loc(GenericWindow* p, int x=0, int y=0): pw(p), x(x), y(y) {};
     };
     Canvas *pCanvas;
-    std::vector<GenericWindow*> windows;
+    std::vector<window_loc> windows;
 
     public:
     System(char fill_ch=' ') {pCanvas = new Canvas(fill_ch);};

@@ -7,13 +7,13 @@ Canvas* System::getCanvas(void)
 
 void System::addWindow(GenericWindow *w, int x, int y)
 {
-    windows.push_back(w);
+    windows.push_back(window_loc(w, x, y));
 };
 
 void System::draw(void)
 {
-    for(auto w : windows)
+    for(const auto w : windows)
     {
-        w->draw(*pCanvas, 0, 0);
+        w.pw->draw(*pCanvas, w.x, w.y);
     }
 }

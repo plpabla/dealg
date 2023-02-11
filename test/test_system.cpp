@@ -59,21 +59,21 @@ TEST(SystemTest, CanRemoveLastWindow)
 /******************
  * Drawing 
  ******************/
-// TEST(SystemTest, DrawAllWindows)
-// {
-//     System s('.');
-//     Baner b0("Hello",'x');
-//     Baner b1("Hi",'@');
-//     s.addWindow(&b0,2,1);
-//     s.addWindow(&b1,10,2);
+TEST(SystemTest, DrawAllWindows)
+{
+    System s('.');
+    Baner b0("Hello",'x');
+    Baner b1("Hi",'@');
+    s.addWindow(&b0,2,1);
+    s.addWindow(&b1,10,2);
 
-//     s.draw();
+    s.draw();
 
-//     Canvas *pc = s.getCanvas();
-//     CompareStringParts(".....................", *pc, 0, 0);
-//     CompareStringParts("..xxxxxxxxx..........", *pc, 0, 1);
-//     CompareStringParts("..x Hello @@@@@@.....", *pc, 0, 2);
-//     CompareStringParts("..xxxxxxxx@ Hi @.....", *pc, 0, 3);
-//     CompareStringParts("..........@@@@@@.....", *pc, 0, 4);
-//     CompareStringParts(".....................", *pc, 0, 5);
-// }
+    Canvas *pc = s.getCanvas();
+    CompareStringParts(".....................", *pc, 0, 0);
+    CompareStringParts("..xxxxxxxxx..........", *pc, 0, 1);
+    CompareStringParts("..x Hello @@@@@@.....", *pc, 0, 2);
+    CompareStringParts("..xxxxxxxx@ Hi @.....", *pc, 0, 3);
+    CompareStringParts("..........@@@@@@.....", *pc, 0, 4);
+    CompareStringParts(".....................", *pc, 0, 5);
+}
