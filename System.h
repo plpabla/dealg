@@ -24,4 +24,5 @@ class System
     void addWindow(GenericWindow *w, int x=0, int y=0);
     void removeLastWindow(void) {windows.pop_back();};
     void draw(void);
+    virtual void keyboard_handler(int key) {};
 };

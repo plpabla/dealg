@@ -1,12 +1,29 @@
 @startuml
-class System
+class Game
 {
-    - GenericWindow windows[]
-    - GenericWindow* currentWindow
-    - Canvas c
-    + draw() // loop over windows and next calls c.render()
     + keyboard_handler()
 }
+
+Game <|-- System
+
+class System
+{
+    - vector<window_loc> windows
+    - Canvas* pCanvas
+    + addWindow(window_loc data)
+    + removeLastWindow()
+    + draw()
+    + {abstract} keyboard_handler()
+}
+
+struct window_loc
+{
+    GenericWindow* pw;
+    int x;
+    int y;
+}
+
+System *- window_loc
 
 
 abstract GenericWindow
