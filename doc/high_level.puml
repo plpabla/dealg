@@ -38,10 +38,10 @@ class Canvas
 }
 
 System *-- Canvas
-System *-- GenericWindow
+window_loc *-- GenericWindow
 
 
-class PopupWindow
+class Baner
 class Frame
 class ListWindow
 {
@@ -55,7 +55,7 @@ class ListWindow
     + updatePrices()
 }
 Frame <|-- ListWindow
-Frame <|-- PopupWindow
+Frame <|-- Baner
 GenericWindow <|-- Frame
 
 abstract Item
