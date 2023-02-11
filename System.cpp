@@ -12,8 +12,10 @@ void System::addWindow(GenericWindow *w, int x, int y)
 
 void System::draw(void)
 {
+    pCanvas->clear();
     for(const auto w : windows)
     {
         w.pw->draw(*pCanvas, w.x, w.y);
     }
+    pCanvas->render();
 }

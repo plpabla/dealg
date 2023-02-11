@@ -1,6 +1,7 @@
 #include <iostream>
 #include <cstdio>
 #include <ncurses.h>
+#include "System.h"
 #include "Canvas.h"
 #include "Frame.h"
 #include "ListWindow.h"
@@ -17,9 +18,9 @@ int main()
     Baner info_top_assets("                      Assets                         ", '#');
     Baner info_top_price("   Price  ", '#');
     Baner info_top_stock("Quantity", '#');
-    Baner info_keys("             [b]uy       [s]ell        [t]ravel        [q]uit               ", ' ');
+    Baner info_keys("   [b]uy       [s]ell        [t]ravel        [q]uit               ", ' ');
+    Baner balance(" Balance:   $14000", '#');
 
-    Canvas c(' ');
     ListWindow<Stock> assets_window(80, 10, '#', '.', 9);
     assets_window.add(Stock("Item A",150,0,100,200));
     assets_window.add(Stock("Item B",2000,0,1000,2220));
@@ -30,28 +31,27 @@ int main()
     assets_window.add(Stock("Item E2",3900,0,200, 4e3));
     assets_window.add(Stock("Item E3",299,0,100, 300));
 
+    System s;
+    s.addWindow(&info_top_assets, 0, 0);
+    s.addWindow(&info_top_price, 56, 0);
+    s.addWindow(&info_top_stock, 68, 0);
+    s.addWindow(&assets_window, 0, 2);
+    s.addWindow(&info_keys, 0, 13);
+    s.addWindow(&balance, 58, 13);
+
     int ch=0;
     do
     {    
         clear();
         assets_window.navigate(ch);
-
-        info_top_assets.draw(c, 0, 0);
-        info_top_price.draw(c, 56, 0);
-        info_top_stock.draw(c, 68, 0);
-        assets_window.draw(c, 0, 2);
-        info_keys.draw(c,0,12);
+        s.draw();
 
         if(ch=='t')
         {   
             assets_window.updatePrices();
-            Baner b("xxxxxx");
-            b.draw(c, 10, 10);
         }
+        // s.getCanvas()->render();
 
-        // Baner budget_window();
-
-        c.render();
     } while((ch = getch()) != 'q');
 
     refresh();
