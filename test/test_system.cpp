@@ -39,3 +39,17 @@ TEST(SystemTest, CanAddWindow)
 
     ASSERT_EQ(s.getWindowsCount(), 1);
 }
+
+/******************
+ * Remove window 
+ ******************/
+TEST(SystemTest, CanRemoveLastWindow)
+{
+    System s;
+    Baner b0;
+    s.addWindow(&b0);
+    ASSERT_EQ(s.getWindowsCount(), 1);
+
+    s.removeLastWindow();
+    ASSERT_EQ(s.getWindowsCount(), 0);
+}

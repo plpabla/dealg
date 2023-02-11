@@ -15,4 +15,5 @@ class System
     Canvas* getCanvas(void);
     int getWindowsCount(void) {return windows.size();};
     void addWindow(GenericWindow *w) {windows.push_back(w);};
+    void removeLastWindow(void) {windows.pop_back();};
 };
