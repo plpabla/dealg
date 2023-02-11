@@ -22,6 +22,7 @@ add_library(frame Frame.cpp)
 add_library(item Item.cpp) 
 add_library(stock Stock.cpp)
 add_library(baner Baner.cpp)
+add_library(system System.cpp)
 
 add_executable(runTests 
   test/tests.cpp 
@@ -31,6 +32,7 @@ add_executable(runTests
   test/test_listwindow.cpp
   test/test_baner.cpp
   test/test_helpers.cpp
+  test/test_system.cpp
 )
 
 target_link_libraries(runTests 
@@ -40,6 +42,7 @@ target_link_libraries(runTests
   item 
   stock
   baner
+  system
   ${CURSES_LIBRARIES}
 )
 
@@ -54,5 +57,6 @@ target_link_libraries(${PROJECT_NAME}
   item 
   stock
   baner
+  system
   ${CURSES_LIBRARIES})
 
