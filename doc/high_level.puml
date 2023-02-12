@@ -1,7 +1,14 @@
 @startuml
 class Game
 {
+    - float budget
+
+    + setBudget()
+    + getBudget()
     + keyboard_handler()
+    - travel()
+    - buy()
+    - sell()
 }
 
 Game <|-- System
@@ -42,6 +49,11 @@ window_loc *-- GenericWindow
 
 
 class Baner
+class InputWindow
+{
+    + InputWindow(string msg)
+    + int draw()
+}
 class Frame
 class ListWindow
 {
@@ -55,6 +67,7 @@ class ListWindow
     + updatePrices()
 }
 Frame <|-- ListWindow
+Frame <|-- InputWindow
 Frame <|-- Baner
 GenericWindow <|-- Frame
 
