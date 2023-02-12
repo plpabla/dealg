@@ -31,7 +31,7 @@ class ListWindow : public Frame
     };    
     Item_T* getCurrentItem(void); 
     int getNumberOfElements(void) {return items.size();};
-    void draw(Canvas &c, int x, int y) override;
+    int draw(Canvas &c, int x, int y) override;
     void updatePrices(void);
 };
 
@@ -74,7 +74,7 @@ void ListWindow<Item_T>::updatePrices(void)
 }
 
 template<typename Item_T> 
-void ListWindow<Item_T>::draw(Canvas &c, int x, int y)
+int ListWindow<Item_T>::draw(Canvas &c, int x, int y)
 {
     constexpr int X_OFFSET = 1; 
     constexpr int Y_OFFSET = 1; 
@@ -121,4 +121,5 @@ void ListWindow<Item_T>::draw(Canvas &c, int x, int y)
             c.canvas[current_row].replace(x+x_offset_qty, qty_txt.str().length(), qty_txt.str());
         }
     }
+    return 0;
 };

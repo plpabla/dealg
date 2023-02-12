@@ -15,7 +15,7 @@ public:
     GenericWindow(int w=0, int h=0, char border='x', char fill=' '): 
         width(w), height(h), border_ch(border), fill_ch(fill) {};
     virtual ~GenericWindow() {};
-    virtual void draw(Canvas &c, int x, int y) = 0;
+    virtual int draw(Canvas &c, int x, int y) = 0;
     int GetWidth() {return width;};
     int GetHeight() {return height;};
 };
