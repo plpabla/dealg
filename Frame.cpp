@@ -8,7 +8,7 @@ using namespace std;
 
 Frame::Frame(int w, int h, char border, char fill): GenericWindow(w,h,border, fill) { };
 
-int Frame::draw(Canvas &c, int x, int y)
+void Frame::draw(Canvas &c, int x, int y)
 {
     #ifdef DEBUG
         cout << "Drawing frame at (" <<x << ", " << y << ") " << width << "x" << height << endl;
@@ -18,7 +18,7 @@ int Frame::draw(Canvas &c, int x, int y)
     bool it_is_border_line = true;
     for(int row=y; row<(y+height); row++)
     {
-        if(row>=SCREEN_HEIGHT) return -1;
+        if(row>=SCREEN_HEIGHT) return;
         // last line is also border
         if(row==(y+height-1)) it_is_border_line = true;
 
@@ -44,5 +44,4 @@ int Frame::draw(Canvas &c, int x, int y)
         // after first line, following are no borders
         it_is_border_line = false;
     }
-    return 0;
 }

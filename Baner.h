@@ -13,5 +13,5 @@ class Baner: public Frame
         Frame(msg.length()+4, 3, border, ' '), msg(msg) {};
     virtual ~Baner() {};
 
-    int draw(Canvas &c, int x, int y) override;
+    void draw(Canvas &c, int x, int y) override;
 };
