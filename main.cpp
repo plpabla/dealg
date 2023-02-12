@@ -1,6 +1,7 @@
 #include <iostream>
 #include <cstdio>
 #include <ncurses.h>
+#include <string>
 #include "System.h"
 #include "Canvas.h"
 #include "Frame.h"
@@ -8,6 +9,8 @@
 #include "Stock.h"
 #include "Baner.h"
 #include "InputWindow.h"
+
+using namespace std;
 
 int main()
 {
@@ -40,25 +43,35 @@ int main()
     s.addWindow(&assets_window, 0, 2);
     s.addWindow(&info_keys, 0, 13);
     s.addWindow(&balance, 58, 13);
-    s.addWindow(&input_window_test,8,17);
+    // s.addWindow(&input_window_test,8,17);
 
     int ch=0;
     do
     {    
         clear();
         
-        if(ch=='t')
+        switch(ch)
         {   
+            case 't':
+            s.addWindow(&input_window_test,8,17);
+            s.draw();
+            s.removeLastWindow();
             assets_window.updatePrices();
-        } else
-        {
+            char str[20];
+            echo();
+            move(14, 18);
+            getstr(str);
+            noecho();
+            break;
+
+            default:
             assets_window.navigate(ch);
         }
         
         s.draw();
+        refresh();
     } while((ch = getch()) != 'q');
 
-    refresh();
     endwin();
     return 0;
 }
