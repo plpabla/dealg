@@ -15,7 +15,7 @@ class InputWindow: public Frame
     InputWindow(std::string msg, char border='X'): 
         Frame(msg.length()+ROOM_FOR_INPUT, 3, border, ' '), msg(msg) {};
     virtual ~InputWindow() {};
-    
-    int draw(Canvas &c, int x, int y) override;
+
+    void draw(Canvas &c, int x, int y) override;
 };
 
