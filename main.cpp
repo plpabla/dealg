@@ -7,6 +7,7 @@
 #include "ListWindow.h"
 #include "Stock.h"
 #include "Baner.h"
+#include "InputWindow.h"
 
 int main()
 {
@@ -20,6 +21,7 @@ int main()
     Baner info_top_stock("Quantity", '#');
     Baner info_keys("   [b]uy       [s]ell        [t]ravel        [q]uit               ", ' ');
     Baner balance(" Balance:   $14000", '#');
+    InputWindow input_window_test("Enter a number: ",'#');
 
     ListWindow<Stock> assets_window(80, 10, '#', '.', 9);
     assets_window.add(Stock("Item A",150,0,100,200));
@@ -38,20 +40,22 @@ int main()
     s.addWindow(&assets_window, 0, 2);
     s.addWindow(&info_keys, 0, 13);
     s.addWindow(&balance, 58, 13);
+    s.addWindow(&input_window_test,8,17);
 
     int ch=0;
     do
     {    
         clear();
-        assets_window.navigate(ch);
-        s.draw();
-
+        
         if(ch=='t')
         {   
             assets_window.updatePrices();
+        } else
+        {
+            assets_window.navigate(ch);
         }
-        // s.getCanvas()->render();
-
+        
+        s.draw();
     } while((ch = getch()) != 'q');
 
     refresh();
