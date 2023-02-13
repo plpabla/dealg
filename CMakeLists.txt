@@ -23,6 +23,7 @@ add_library(item Item.cpp)
 add_library(stock Stock.cpp)
 add_library(baner Baner.cpp)
 add_library(system System.cpp)
+add_library(game Game.cpp)
 add_library(inputwindow InputWindow.cpp)
 
 add_executable(runTests 
@@ -35,6 +36,7 @@ add_executable(runTests
   test/test_helpers.cpp
   test/test_system.cpp
   test/test_inputwindow.cpp
+  test/test_game.cpp
 )
 
 target_link_libraries(runTests 
@@ -46,6 +48,7 @@ target_link_libraries(runTests
   baner
   system
   inputwindow
+  game
   ${CURSES_LIBRARIES}
 )
 
@@ -62,5 +65,6 @@ target_link_libraries(${PROJECT_NAME}
   baner
   system
   inputwindow
+  game
   ${CURSES_LIBRARIES})
 
