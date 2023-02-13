@@ -43,7 +43,6 @@ int main()
     s.addWindow(&assets_window, 0, 2);
     s.addWindow(&info_keys, 0, 13);
     s.addWindow(&balance, 58, 13);
-    // s.addWindow(&input_window_test,8,17);
 
     int ch=0;
     do
@@ -53,23 +52,20 @@ int main()
         switch(ch)
         {   
             case 't':
-            s.addWindow(&input_window_test,8,17);
-            s.draw();
-            s.removeLastWindow();
-            assets_window.updatePrices();
-            char str[20];
-            echo();
-            move(14, 18);
-            getstr(str);
-            noecho();
-            break;
+                s.addWindow(&input_window_test,8,17);
+                assets_window.updatePrices();
+                s.draw();
+                refresh();
+                int n;
+                n = input_window_test.getInput();
+                s.removeLastWindow();
+                break;
 
             default:
-            assets_window.navigate(ch);
+                assets_window.navigate(ch);
+                s.draw();
+                refresh();
         }
-        
-        s.draw();
-        refresh();
     } while((ch = getch()) != 'q');
 
     endwin();

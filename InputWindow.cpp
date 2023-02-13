@@ -13,5 +13,12 @@ void InputWindow::draw(Canvas &c, int x, int y)
 
 int InputWindow::getInput(void)
 {
-    //
+    move(y+1, x+msg.length()-ROOM_FOR_INPUT+2);
+    int num;
+    echo();
+    scanw("%d",&num);
+    noecho();
+    refresh();
+    move(SCREEN_HEIGHT, 0);
+    return num;
 }
