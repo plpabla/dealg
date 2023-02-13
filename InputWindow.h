@@ -1,21 +1,18 @@
 #pragma once
 #include <string>
-#include "Frame.h"
+#include "Baner.h"
 
-class InputWindow: public Frame
+class InputWindow: public Baner
 {
-    protected:
-    std::string msg;
-
     enum {
-        ROOM_FOR_INPUT = 10
+        ROOM_FOR_INPUT = 6
     };
 
     public:
     InputWindow(std::string msg, char border='X'): 
-        Frame(msg.length()+ROOM_FOR_INPUT, 3, border, ' '), msg(msg) {};
+        Baner(msg+std::string(ROOM_FOR_INPUT,' '), border) {};
     virtual ~InputWindow() {};
 
-    void draw(Canvas &c, int x, int y) override;
+    int getInput(void) {return 42;};
 };
 
