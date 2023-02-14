@@ -15,3 +15,4 @@ struct Canvas
     private:
     char fill = ' ';
 };
+

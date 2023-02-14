@@ -1,6 +1,7 @@
 #pragma once
 #include <vector>
 #include "Canvas.h"
+#include "Item.h"
 #include "GenericWindow.h"
 
 class System
