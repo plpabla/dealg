@@ -9,6 +9,7 @@ struct Canvas
     std::string canvas[SCREEN_HEIGHT];
 
     Canvas(char fill=' ');
+    ~Canvas() {};
     void render(void);
     void clear(void);
 

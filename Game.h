@@ -6,7 +6,7 @@
 #include "ListWindow.h"
 #include "Stock.h"
 #include "Canvas.h"
-#include "Baner.h"
+// #include "Baner.h"
 // #include "Frame.h"
 #include "InputWindow.h"
 // #include "Item.h"
@@ -21,7 +21,7 @@ class Game: public System
 
     public:
     Game(float budget=0.0);
-    ~Game();
+    ~Game() override;
 
     float getBudget() {return budget;}
     void setBudget(float b) {budget=b;}

@@ -44,6 +44,8 @@ Game::Game(float budget): System(), budget(budget)
 
 Game::~Game()
 {
+    delete pCanvas; 
+    
     for(auto &p : windows)
     {
         delete p;

@@ -19,7 +19,7 @@ class System
 
     public:
     System(char fill_ch=' ') {pCanvas = new Canvas(fill_ch);};
-    ~System(){delete pCanvas; };
+    virtual ~System() { delete pCanvas; };
     Canvas* getCanvas(void);
     int getWindowsCount(void) {return windows.size();};
     void addWindow(GenericWindow *w, int x=0, int y=0);

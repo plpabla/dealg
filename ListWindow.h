@@ -20,7 +20,7 @@ class ListWindow : public Frame
     ListWindow(int w=SCREEN_WIDTH, int h=SCREEN_HEIGHT, 
         char border='X', char fill=' ', int ditits_for_qty=0): 
         Frame(w, h, border, fill), qty_digits(ditits_for_qty) {};
-    virtual ~ListWindow() {};
+    virtual ~ListWindow() override {};
 
     bool navigate(int k);
     void add(Item_T i);         //TODO: Consider refactoring to operator+

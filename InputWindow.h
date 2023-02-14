@@ -14,7 +14,7 @@ class InputWindow: public Baner
     public:
     InputWindow(std::string msg, char border='X'): 
         Baner(msg+std::string(ROOM_FOR_INPUT,' '), border) {};
-    virtual ~InputWindow() {};
+    ~InputWindow() override {};
     void draw(Canvas &c, int x, int y) override;
     int getInput(void);
 };

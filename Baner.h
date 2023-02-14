@@ -11,7 +11,7 @@ class Baner: public Frame
     public:
     Baner(std::string msg = "", char border='X'): 
         Frame(msg.length()+4, 3, border, ' '), msg(msg) {};
-    virtual ~Baner() {};
+    ~Baner() override {};
 
     void draw(Canvas &c, int x, int y) override;
 };
