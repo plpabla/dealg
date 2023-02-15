@@ -2,13 +2,14 @@
 #include <iostream>
 #include <vector>
 #include "System.h"
-// #include "GenericWindow.h"
+
+// #include "GenericWindow.h"    
 #include "ListWindow.h"
 #include "Stock.h"
-#include "Canvas.h"
+// #include "Canvas.h"
 // #include "Baner.h"
 // #include "Frame.h"
-#include "InputWindow.h"
+// #include "InputWindow.h"
 // #include "Item.h"
 // #include "parameters.h"
 
@@ -23,6 +24,7 @@ class Game: public System
     Game(float budget=0.0);
     ~Game() override;
 
+    void keyboard_handler(int key) override {};
     float getBudget() {return budget;}
     void setBudget(float b) {budget=b;}
 

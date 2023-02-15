@@ -1,4 +1,5 @@
 #include "Game.h"
+#include "Baner.h"
 
 ListWindow<Stock>* Game::create_assets_list(void)
 {
@@ -44,8 +45,6 @@ Game::Game(float budget): System(), budget(budget)
 
 Game::~Game()
 {
-    delete pCanvas; 
-    
     for(auto &p : windows)
     {
         delete p;
