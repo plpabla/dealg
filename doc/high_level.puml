@@ -5,7 +5,7 @@ class Game
 
     + setBudget()
     + getBudget()
-    + keyboard_handler()
+    + run()
     - travel()
     - buy()
     - sell()
