@@ -3,6 +3,7 @@
 #include <ncurses.h>
 #include <string>
 #include "Game.h"
+// #include "Baner.h"
 
 using namespace std;
 
@@ -21,9 +22,9 @@ int main()
     // Not needed, but linker crash when I remove this block
     {
     // Baner info_top_assets("                      Assets                         ", '#');
-    ListWindow<Stock> assets_window(80, 10, '#', '.', 9);
-    assets_window.add(Stock("Item A",150,0,100,200));
-    System s;
+    // ListWindow<Stock> assets_window(80, 10, '#', '.', 9);
+    // assets_window.add(Stock("Item A",150,0,100,200));
+    // System s;
     }
 
     endwin();

@@ -17,14 +17,14 @@ FetchContent_MakeAvailable(googletest)
 find_package(Curses REQUIRED)
 include_directories(${CURSES_INCLUDE_DIR})
 
+add_library(baner Baner.cpp)
 add_library(canvas Canvas.cpp) 
 add_library(frame Frame.cpp)
-add_library(item Item.cpp) 
-add_library(stock Stock.cpp)
-add_library(baner Baner.cpp)
-add_library(system System.cpp)
 add_library(game Game.cpp)
 add_library(inputwindow InputWindow.cpp)
+add_library(item Item.cpp) 
+add_library(stock Stock.cpp)
+add_library(system System.cpp)
 
 add_executable(runTests 
   test/tests.cpp 
@@ -58,13 +58,14 @@ gtest_discover_tests(runTests)
 # Prepare also main
 add_executable(${PROJECT_NAME} main.cpp)
 target_link_libraries(${PROJECT_NAME} 
-  frame 
-  canvas 
-  item 
+  ${CURSES_LIBRARIES}  
   stock
-  baner
-  system
   inputwindow
   game
-  ${CURSES_LIBRARIES})
+  baner
+  system
+  canvas
+  item
+  frame
+  )
 
