@@ -16,6 +16,7 @@ public:
         width(w), height(h), border_ch(border), fill_ch(fill) {};
     virtual ~GenericWindow() {};
     virtual void draw(Canvas &c, int x, int y) = 0;
+    virtual bool navigate(int k) = 0;
     int GetWidth() {return width;};
     int GetHeight() {return height;};
 };

@@ -22,7 +22,7 @@ class ListWindow : public Frame
         Frame(w, h, border, fill), qty_digits(ditits_for_qty) {};
     virtual ~ListWindow() override {};
 
-    bool navigate(int k);
+    bool navigate(int k) override;
     void add(Item_T i);         //TODO: Consider refactoring to operator+
     void removeAll(void) 
     { 
