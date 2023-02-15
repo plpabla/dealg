@@ -14,9 +14,7 @@ int main()
     noecho();
 
     Game g(1000);
-    g.draw();
-    refresh();
-    getch();
+    g.run();
 
     endwin();
     return 0;

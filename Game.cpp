@@ -39,6 +39,7 @@ Game::Game(float budget): System(), budget(budget)
     addWindow(pw, 58, 13);
 
     pw = create_assets_list();
+    current_window = pw;
     windows.push_back(pw);
     addWindow(pw, 0, 2);
 }
@@ -49,4 +50,69 @@ Game::~Game()
     {
         delete p;
     }
+}
+
+void Game::run(void)
+{
+    // draw();
+    // refresh();
+    // getch();
+
+    int ch=0;
+    do
+    {    
+        clear();
+        
+        switch(ch)
+        {   
+            case 't':
+            // s.addWindow(&input_window_test,8,17);
+            // s.draw();
+            // s.removeLastWindow();
+            // assets_window.updatePrices();
+            // char str[20];
+            // echo();
+            // move(14, 18);
+            // getstr(str);
+            // noecho();
+            break;
+
+            default:
+            current_window->navigate(ch);
+            break;
+        }
+        
+        draw();
+        refresh();
+    } while((ch = getch()) != 'q');
+}
+
+void Game::keyboard_handler(int key)
+{
+    // int ch=0;
+    // do
+    // {    
+    //     clear();
+        
+    //     switch(ch)
+    //     {   
+    //         case 't':
+    //         // s.addWindow(&input_window_test,8,17);
+    //         // s.draw();
+    //         // s.removeLastWindow();
+    //         // assets_window.updatePrices();
+    //         // char str[20];
+    //         // echo();
+    //         // move(14, 18);
+    //         // getstr(str);
+    //         // noecho();
+    //         break;
+
+    //         default:
+    //         // assets_window.navigate(ch);
+    //     }
+        
+    //     // s.draw();
+    //     // refresh();
+    // } while((ch = getch()) != 'q');
 }
