@@ -62,9 +62,9 @@ gtest_discover_tests(runTests)
 add_executable(${PROJECT_NAME} main.cpp)
 target_link_libraries(${PROJECT_NAME} 
   ${CURSES_LIBRARIES}  
-  dynamicbaner
   stock
   game
+  dynamicbaner
   inputwindow
   baner
   system

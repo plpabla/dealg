@@ -13,7 +13,7 @@ int main()
     keypad(stdscr, TRUE);
     noecho();
 
-    Game g(1000);
+    Game g(10000);
     g.run();
 
     endwin();

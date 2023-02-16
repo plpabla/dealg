@@ -1,5 +1,5 @@
 #include "Game.h"
-// #include "InputWindow.h"
+#include "DynamicBaner.h"
 
 ListWindow<Stock>* Game::create_assets_list(void)
 {
@@ -35,10 +35,9 @@ Game::Game(float budget): System(), budget(budget)
     windows.push_back(pw);
     addWindow(pw, 0, 13);
 
-    // TODO: I should have access to that or make it dynamically linked with a variable!!!!
-    pBudget = new Baner(" Balance:   $14000", '#'); 
+    pBudget = new DynamicBaner(" Balance: ", '#', &this->budget, 10); 
     windows.push_back(pBudget);
-    addWindow(pBudget, 58, 13);
+    addWindow(pBudget, 55, 13);
 
     pAssets = create_assets_list();
     pCurrentWindow = pAssets;
@@ -86,6 +85,9 @@ void Game::run(void)
                     windows.push_back(pTravels);
                     addWindow(pTravels, 10, 5);
                     pCurrentWindow = pTravels;
+
+                    // For tests only
+                    this->budget -= 1000;
                 }
                 // addWindow(get_amount_window,8,17);
                 // draw();
