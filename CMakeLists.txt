@@ -19,6 +19,7 @@ include_directories(${CURSES_INCLUDE_DIR})
 
 add_library(baner Baner.cpp)
 add_library(canvas Canvas.cpp) 
+add_library(dynamicbaner DynamicBaner.cpp)
 add_library(frame Frame.cpp)
 add_library(game Game.cpp)
 add_library(inputwindow InputWindow.cpp)
@@ -33,6 +34,7 @@ add_executable(runTests
   test/test_stock.cpp 
   test/test_listwindow.cpp
   test/test_baner.cpp
+  test/test_dynamicbaner.cpp
   test/test_helpers.cpp
   test/test_system.cpp
   test/test_inputwindow.cpp
@@ -49,6 +51,7 @@ target_link_libraries(runTests
   system
   inputwindow
   game
+  dynamicbaner
   ${CURSES_LIBRARIES}
 )
 
@@ -59,6 +62,7 @@ gtest_discover_tests(runTests)
 add_executable(${PROJECT_NAME} main.cpp)
 target_link_libraries(${PROJECT_NAME} 
   ${CURSES_LIBRARIES}  
+  dynamicbaner
   stock
   game
   inputwindow
