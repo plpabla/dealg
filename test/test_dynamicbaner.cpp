@@ -40,3 +40,17 @@ TEST(DynamicTest, BanerDisplaysShorterText) {
     CompareStringParts("  xxxxxxxxxxxxxxxxxxxxx     ", c, 0, 3);
     CompareStringParts("                            ", c, 0, 4);
 }
+
+TEST(DynamicTest, BanerIsUpdated) { 
+    float f0 = 42.0;
+    DynamicBaner b0("Amount", 'x', &f0, 10);
+    Canvas c;
+    f0 = 690.10;
+    b0.draw(c, 2, 1);
+
+    CompareStringParts("                            ", c, 0, 0);
+    CompareStringParts("  xxxxxxxxxxxxxxxxxxxxx     ", c, 0, 1);
+    CompareStringParts("  x Amount     690.10 x     ", c, 0, 2);
+    CompareStringParts("  xxxxxxxxxxxxxxxxxxxxx     ", c, 0, 3);
+    CompareStringParts("                            ", c, 0, 4);
+}

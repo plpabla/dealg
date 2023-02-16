@@ -10,6 +10,6 @@ void DynamicBaner::draw(Canvas &c, int x, int y)
     Frame::draw(c, x, y);
 
     ostringstream msg_full;
-    msg_full<<msg<<" "<<fixed<<setw(digits)<<setprecision(2)<<42.00;
+    msg_full<<msg<<" "<<fixed<<setw(digits)<<setprecision(2)<<*pnum;
     c.canvas[y+1].replace(x+2, msg_full.str().length(), msg_full.str());
 }
