@@ -60,8 +60,8 @@ add_executable(${PROJECT_NAME} main.cpp)
 target_link_libraries(${PROJECT_NAME} 
   ${CURSES_LIBRARIES}  
   stock
-  inputwindow
   game
+  inputwindow
   baner
   system
   canvas

@@ -5,6 +5,8 @@
 
 #include "ListWindow.h"
 #include "Stock.h"
+#include "Baner.h"
+#include "InputWindow.h"
 
 
 class Game: public System
@@ -12,7 +14,21 @@ class Game: public System
     protected:
     float budget;
     std::vector<GenericWindow*> windows;
-    GenericWindow* current_window;
+
+    enum state
+    {
+        SELECT,
+        TRAVEL,
+        BUY,
+        SELL
+    };
+    state current_state;
+
+    GenericWindow* pCurrentWindow = nullptr;
+    ListWindow<Stock>* pAssets = nullptr;
+    ListWindow<Stock>* pTravels = nullptr;
+    Baner* pBudget = nullptr;
+    InputWindow* pAmount = nullptr;
 
     public:
     Game(float budget=0.0);
