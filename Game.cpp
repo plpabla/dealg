@@ -108,11 +108,20 @@ void Game::run(void)
             {
                 if(current_state==state::SELECT)
                 {
-                    current_state = state::BUY;
-                    windows.push_back(pAmount);
                     addWindow(pAmount, 12, 8);
                     pCurrentWindow = pAmount;
-                }
+                    draw();
+                    refresh();
+                    int n = pAmount->getInput();
+
+                    pAssets->getCurrentItem()->operator+=(n);
+                    budget-=n*pAssets->getCurrentItem()->getPrice();
+
+                    clear();
+                    removeLastWindow();
+                    pCurrentWindow = pAssets;
+                    current_state = state::SELECT;
+            }
                 break;
             }
             case 10:  //ENTER
@@ -126,10 +135,6 @@ void Game::run(void)
                         current_state = state::SELECT;
                         break;
                     case state::BUY:
-                        windows.pop_back();
-                        removeLastWindow();
-                        pCurrentWindow = pAssets;
-                        current_state = state::SELECT;
                         break;
                     case state::SELL:
                         break;
