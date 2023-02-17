@@ -20,7 +20,8 @@ class Game: public System
         SELECT,
         TRAVEL,
         BUY,
-        SELL
+        SELL,
+        MESSAGE
     };
     state current_state;
 
@@ -39,6 +40,10 @@ class Game: public System
     void setBudget(float b) {budget=b;}
 
     private:
-    void keyboard_handler(int key) override;
     ListWindow<Stock>* create_assets_list(void);
+
+    void travel(void);
+    void return_from_travel(void);
+    void buy(void);
+    void sell(void);
 };

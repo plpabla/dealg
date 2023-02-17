@@ -64,122 +64,100 @@ Game::~Game()
 
 void Game::run(void)
 {
-    // draw();
-    // refresh();
-    // getch();
-
-    // GenericWindow* get_amount_window = new InputWindow("Travel? ");
     int ch=0;
     do
     {    
         clear();
-        
         switch(ch)
         {   
             case 't':
-            {
-                if(current_state==state::SELECT)
-                {
-                    // Process only here
-                    current_state = state::TRAVEL;
-                    windows.push_back(pTravels);
-                    addWindow(pTravels, 10, 5);
-                    pCurrentWindow = pTravels;
-
-                    // For tests only
-                    this->budget -= 1000;
-                }
-                // addWindow(get_amount_window,8,17);
-                // draw();
-                // refresh();
-                // removeLastWindow();
-                // dynamic_cast<ListWindow<Stock>*>(current_window)->updatePrices();
-                // s.getLastWindow()->getInput()
-                // s.removeLastWindow();
-                // assets_window.updatePrices();
-                // char str[20];
-                // echo();
-                // move(14, 18);
-                // getstr(str);
-                // noecho();
+                if(current_state==state::SELECT) travel();
                 break;
-            }
+
             case 'b':
-            {
-                if(current_state==state::SELECT)
-                {
-                    addWindow(pAmount, 12, 8);
-                    pCurrentWindow = pAmount;
-                    draw();
-                    refresh();
-                    int n = pAmount->getInput();
-
-                    pAssets->getCurrentItem()->operator+=(n);
-                    budget-=n*pAssets->getCurrentItem()->getPrice();
-
-                    clear();
-                    removeLastWindow();
-                    pCurrentWindow = pAssets;
-                    current_state = state::SELECT;
-            }
+                if(current_state==state::SELECT) buy();
                 break;
-            }
+
+            case 's':
+                if(current_state==state::SELECT) sell();
+
             case 10:  //ENTER
-            {
-                switch(current_state)
+                switch(current_state) 
                 {
                     case state::TRAVEL:
-                        windows.pop_back();
-                        removeLastWindow();
-                        pCurrentWindow = pAssets;
-                        current_state = state::SELECT;
-                        break;
-                    case state::BUY:
-                        break;
-                    case state::SELL:
-                        break;
-                    default:
+                        return_from_travel();
                         break;
                 }
-            }
+
             default:
-            {
                 pCurrentWindow->navigate(ch);
                 break;
-            }
-        }
-        
+        }   
         draw();
         refresh();
     } while((ch = getch()) != 'q');
 }
 
-void Game::keyboard_handler(int key)
+void Game::travel(void)
 {
-    // int ch=0;
-    // do
-    // {    
-    //     clear();
-        
-    //     switch(ch)
-    //     {   
-    //         case 't':
-    //         // s.addWindow(&input_window_test,8,17);
-    //         // s.draw();
-    //         // s.removeLastWindow();
-    //         // assets_window.updatePrices();
-    //         // char str[20];
-    //         // echo();
-    //         // move(14, 18);
-    //         // getstr(str);
-    //         // noecho();
-    //         break;
+    current_state = state::TRAVEL;
+    windows.push_back(pTravels);
+    addWindow(pTravels, 10, 5);
+    pCurrentWindow = pTravels;
 
-    //         default:
-    //         // assets_window.navigate(ch);
-    //     }
-        
-    //     // s.draw();
-    //     // refresh();
-    // } while((ch = getch()) != 'q');
+    // For tests only
+    this->budget -= 1000;
 }
+
+void Game::return_from_travel(void)
+{
+    windows.pop_back();
+    removeLastWindow();
+    pCurrentWindow = pAssets;
+    current_state = state::SELECT;
+}
+
+void Game::buy(void)
+{
+    addWindow(pAmount, 12, 8);
+    pCurrentWindow = pAmount;
+    draw();
+    refresh();
+    int n = pAmount->getInput();
+
+    clear();
+    removeLastWindow();
+
+    Stock* item = pAssets->getCurrentItem();
+    if(n>0 && budget>=(n*item->getPrice()))
+    {
+        item->operator+=(n);
+        budget-=n*item->getPrice();
+    }
+
+    pCurrentWindow = pAssets;
+    current_state = state::SELECT;
+}
+
+void Game::sell(void)
+{
+    addWindow(pAmount, 12, 8);
+    pCurrentWindow = pAmount;
+    draw();
+    refresh();
+    int n = pAmount->getInput();
+    clear();
+    removeLastWindow();
+
+    Stock* item = pAssets->getCurrentItem();
+    if(n>0 && n<=item->getQty())
+    {
+        item->operator-=(n);
+        budget+=n*item->getPrice();
+    }
+
+    pCurrentWindow = pAssets;
+    current_state = state::SELECT;
+}
+
+
