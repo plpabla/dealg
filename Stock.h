@@ -21,4 +21,11 @@ class Stock: public Item
     ~Stock() override {};
 
     int getQty() {return quantity;};
+    Stock& operator+(int q) {quantity+=q; return *this;};
+    Stock& operator-(int q) 
+    {
+        quantity-=q; 
+        if(quantity < 0) quantity = 0;
+        return *this;
+    };
 };

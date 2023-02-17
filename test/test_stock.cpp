@@ -8,7 +8,7 @@ using namespace std;
 
 TEST(StockTest, CanGenerateItemWith012args)
 {
-    Stock s1();
+    Stock s1;
     Stock s2("Wheat");
     Stock s3("Wheat", 42.0);
 }
@@ -77,4 +77,43 @@ TEST(StockTest, UpdatedPriceGeneratesPricesInGivenRange)
     ASSERT_TRUE(min>=MIN_PRICE);
     ASSERT_TRUE(max<=MAX_PRICE);
     ASSERT_TRUE(range >= (0.95*(MAX_PRICE-MIN_PRICE))) << "Actual range: " << min << "-" << max;
+}
+
+/**********************
+ * Operator +- 
+***********************/
+TEST(StockTest, CanAddQty)
+{
+    Stock s("Wheat", 42.0, 0);
+
+    s = s + 200;
+
+    ASSERT_EQ(s.getQty(), 200);
+}
+
+TEST(StockTest, CannotSub)
+{
+    Stock s("Wheat", 42.0, 1000);
+
+    s = s - 200;
+
+    ASSERT_EQ(s.getQty(), 800);
+}
+
+TEST(StockTest, CannotSubBelowZero)
+{
+    Stock s("Wheat", 42.0, 0);
+
+    s = s - 200;
+
+    ASSERT_EQ(s.getQty(), 0);
+}
+
+TEST(StockTest, CanLinkAddSub)
+{
+    Stock s("Wheat", 42.0, 1000);
+
+    s = s - 200 + 300;
+
+    ASSERT_EQ(s.getQty(), 1100);
 }
