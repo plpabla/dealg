@@ -91,11 +91,29 @@ TEST(StockTest, CanAddQty)
     ASSERT_EQ(s.getQty(), 200);
 }
 
-TEST(StockTest, CannotSub)
+TEST(StockTest, CanAddAssignQty)
+{
+    Stock s("Wheat", 42.0, 100);
+
+    s+=200;
+
+    ASSERT_EQ(s.getQty(), 300);
+}
+
+TEST(StockTest, CanSub)
 {
     Stock s("Wheat", 42.0, 1000);
 
     s = s - 200;
+
+    ASSERT_EQ(s.getQty(), 800);
+}
+
+TEST(StockTest, CanSubAssignQty)
+{
+    Stock s("Wheat", 42.0, 1000);
+
+    s-=200;
 
     ASSERT_EQ(s.getQty(), 800);
 }
@@ -105,6 +123,15 @@ TEST(StockTest, CannotSubBelowZero)
     Stock s("Wheat", 42.0, 0);
 
     s = s - 200;
+
+    ASSERT_EQ(s.getQty(), 0);
+}
+
+TEST(StockTest, CannotSubAssignBelowZero)
+{
+    Stock s("Wheat", 42.0, 0);
+
+    s-=200;
 
     ASSERT_EQ(s.getQty(), 0);
 }

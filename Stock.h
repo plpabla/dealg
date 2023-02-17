@@ -28,4 +28,6 @@ class Stock: public Item
         if(quantity < 0) quantity = 0;
         return *this;
     };
+    Stock& operator+=(int q) {return *this + q;};
+    Stock& operator-=(int q) {return *this-q;};
 };
