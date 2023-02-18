@@ -127,7 +127,8 @@ void Game::process_travel(void)
     if(travel_price<=budget)
     {
         budget -= travel_price;
-        // TODO: update prices
+        pTravels->updatePrices();
+        pAssets->updatePrices();
         go_back_to_main_window();
     } else
     {
