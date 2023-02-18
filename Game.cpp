@@ -98,6 +98,8 @@ void Game::run(void)
                 switch(current_state) 
                 {
                     case state::TRAVEL:
+                        process_travel();
+                        break;
                     case state::MESSAGE:
                         go_back_to_main_window();
                         break;
@@ -115,12 +117,23 @@ void Game::run(void)
 void Game::travel(void)
 {
     current_state = state::TRAVEL;
-    // windows.push_back(pTravels);
     addWindow(pTravels, 10, 5);
     pCurrentWindow = pTravels;
+}
 
-    // For tests only
-    this->budget -= 1000;
+void Game::process_travel(void)
+{
+    float travel_price = pTravels->getCurrentItem()->getPrice();
+    if(travel_price<=budget)
+    {
+        budget -= travel_price;
+        // TODO: update prices
+        go_back_to_main_window();
+    } else
+    {
+        go_back_to_main_window();
+        go_to_wrong_amount();
+    }
 }
 
 void Game::go_back_to_main_window(void)
@@ -133,7 +146,6 @@ void Game::go_back_to_main_window(void)
 
 void Game::go_to_wrong_amount(void)
 {
-    // windows.push_back(pWrongAmountMsg);
     addWindow(pWrongAmountMsg, 12, 5);
     pCurrentWindow = pWrongAmountMsg;
     current_state = state::MESSAGE;
