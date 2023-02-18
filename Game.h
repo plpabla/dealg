@@ -42,6 +42,7 @@ class Game: public System
 
     private:
     ListWindow<Stock>* create_assets_list(void);
+    ListWindow<Stock>* create_travels_list(void);
 
     void travel(void);
     void go_back_to_main_window(void);
