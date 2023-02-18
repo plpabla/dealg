@@ -63,7 +63,7 @@ Game::Game(float budget): System(), budget(budget)
     pAmount = new InputWindow("Enter quantity ");
     windows.push_back(pAmount);
 
-    pWrongAmountMsg = new Baner("Wrong amount. Press ENTER to continue.", '#');
+    pWrongAmountMsg = new Baner("Insufficient resources. Press ENTER to continue.", '#');
     windows.push_back(pWrongAmountMsg);
 }
 
