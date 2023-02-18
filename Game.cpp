@@ -52,6 +52,8 @@ Game::Game(float budget): System(), budget(budget)
     pTravels->add(Stock("City D",150,0,100,200));
 
     pAmount = new InputWindow("Enter quantity ");
+
+    pWrongAmountMsg = new Baner("Wrong amount. Press ENTER to continue.", '#');
 }
 
 Game::~Game()
@@ -85,7 +87,8 @@ void Game::run(void)
                 switch(current_state) 
                 {
                     case state::TRAVEL:
-                        return_from_travel();
+                    case state::MESSAGE:
+                        go_back_to_main_window();
                         break;
                 }
 
@@ -109,12 +112,20 @@ void Game::travel(void)
     this->budget -= 1000;
 }
 
-void Game::return_from_travel(void)
+void Game::go_back_to_main_window(void)
 {
     windows.pop_back();
     removeLastWindow();
     pCurrentWindow = pAssets;
     current_state = state::SELECT;
+}
+
+void Game::go_to_wrong_amount(void)
+{
+    windows.push_back(pWrongAmountMsg);
+    addWindow(pWrongAmountMsg, 12, 5);
+    pCurrentWindow = pWrongAmountMsg;
+    current_state = state::MESSAGE;
 }
 
 void Game::buy(void)
@@ -133,10 +144,12 @@ void Game::buy(void)
     {
         item->operator+=(n);
         budget-=n*item->getPrice();
+        pCurrentWindow = pAssets;
+        current_state = state::SELECT;
+    }else
+    {
+        go_to_wrong_amount();
     }
-
-    pCurrentWindow = pAssets;
-    current_state = state::SELECT;
 }
 
 void Game::sell(void)
@@ -154,10 +167,14 @@ void Game::sell(void)
     {
         item->operator-=(n);
         budget+=n*item->getPrice();
+        pCurrentWindow = pAssets;
+        current_state = state::SELECT;
+    } else
+    {
+        go_to_wrong_amount();
     }
 
-    pCurrentWindow = pAssets;
-    current_state = state::SELECT;
+
 }
 
 

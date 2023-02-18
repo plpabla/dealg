@@ -29,6 +29,7 @@ class Game: public System
     ListWindow<Stock>* pAssets = nullptr;
     ListWindow<Stock>* pTravels = nullptr;
     Baner* pBudget = nullptr;
+    Baner* pWrongAmountMsg = nullptr;
     InputWindow* pAmount = nullptr;
 
     public:
@@ -43,7 +44,8 @@ class Game: public System
     ListWindow<Stock>* create_assets_list(void);
 
     void travel(void);
-    void return_from_travel(void);
+    void go_back_to_main_window(void);
+    void go_to_wrong_amount(void);
     void buy(void);
     void sell(void);
 };
