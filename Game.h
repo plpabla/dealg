@@ -21,7 +21,8 @@ class Game: public System
         TRAVEL,
         BUY,
         SELL,
-        MESSAGE
+        MESSAGE,
+        EXIT_PROMPT,
     };
     state current_state;
 
@@ -30,6 +31,7 @@ class Game: public System
     ListWindow<Stock>* pTravels = nullptr;
     Baner* pBudget = nullptr;
     Baner* pWrongAmountMsg = nullptr;
+    Baner* pAreYouSureMsg = nullptr;
     InputWindow* pAmount = nullptr;
 
     public:
@@ -50,4 +52,5 @@ class Game: public System
     void go_to_wrong_amount(void);
     void buy(void);
     void sell(void);
+    void exit_state(void);
 };

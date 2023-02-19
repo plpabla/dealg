@@ -65,6 +65,9 @@ Game::Game(float budget): System(), budget(budget)
 
     pWrongAmountMsg = new Baner("Insufficient resources. Press ENTER to continue.", '#');
     windows.push_back(pWrongAmountMsg);
+
+    pAreYouSureMsg = new Baner("Are you sure? [y]/[n]", '#');
+    windows.push_back(pAreYouSureMsg);
 }
 
 Game::~Game()
@@ -106,9 +109,27 @@ void Game::run(void)
                         break;
                 }
                 break;
-                
+
             case 'q':
-                return;
+                switch(current_state) 
+                {
+                    case state::TRAVEL:
+                    case state::MESSAGE:
+                    case state::EXIT_PROMPT:
+                        go_back_to_main_window();
+                        break;
+                    default:
+                        exit_state();
+                }
+                break;
+            
+            case 'y':
+                if(current_state==state::EXIT_PROMPT) return;
+                break;
+            
+            case 'n':
+                if(current_state==state::EXIT_PROMPT) go_back_to_main_window();
+                break;            
 
             default:
                 pCurrentWindow->navigate(ch);
@@ -158,6 +179,13 @@ void Game::go_to_wrong_amount(void)
     current_state = state::MESSAGE;
 }
 
+void Game::exit_state(void)
+{
+    addWindow(pAreYouSureMsg, 12, 5);
+    pCurrentWindow = pAreYouSureMsg;
+    current_state = state::EXIT_PROMPT;
+}
+
 void Game::buy(void)
 {
     addWindow(pAmount, 12, 8);
@@ -203,8 +231,6 @@ void Game::sell(void)
     {
         go_to_wrong_amount();
     }
-
-
 }
 
 
