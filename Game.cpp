@@ -93,6 +93,7 @@ void Game::run(void)
 
             case 's':
                 if(current_state==state::SELECT) sell();
+                break;
 
             case 10:  //ENTER
                 switch(current_state) 
@@ -104,6 +105,10 @@ void Game::run(void)
                         go_back_to_main_window();
                         break;
                 }
+                break;
+                
+            case 'q':
+                return;
 
             default:
                 pCurrentWindow->navigate(ch);
@@ -111,7 +116,8 @@ void Game::run(void)
         }   
         draw();
         refresh();
-    } while((ch = getch()) != 'q');
+        ch = getch();
+    } while(true);
 }
 
 void Game::travel(void)
