@@ -15,6 +15,18 @@ ListWindow<Stock>* Game::create_assets_list(void)
     return pw;
 }
 
+ListWindow<Stock>* Game::create_travels_list(void)
+{
+    ListWindow<Stock> *pw = new ListWindow<Stock> (60, 8, '#', ' ');
+    pw->add(Stock("Krakow",400,0, 250, 400));
+    pw->add(Stock("Munich",290,0, 250, 400));
+    pw->add(Stock("Rome",320,0, 250, 400));
+    pw->add(Stock("Copenhagen",350,0, 250, 400));
+    pw->add(Stock("Amsterdam",370,0, 250, 400));
+    return pw;
+}
+
+
 Game::Game(float budget): System(), budget(budget) 
 {
     current_state = state::SELECT;
@@ -45,15 +57,14 @@ Game::Game(float budget): System(), budget(budget)
     addWindow(pAssets, 0, 2);
 
     // Not displayed windows
-    pTravels = new ListWindow<Stock>(60, 8, '#', ' ');
-    pTravels->add(Stock("City A",150,0,100,200));
-    pTravels->add(Stock("City B",150,0,100,200));
-    pTravels->add(Stock("City C",150,0,100,200));
-    pTravels->add(Stock("City D",150,0,100,200));
+    pTravels = create_travels_list();
+    windows.push_back(pTravels);
 
     pAmount = new InputWindow("Enter quantity ");
+    windows.push_back(pAmount);
 
-    pWrongAmountMsg = new Baner("Wrong amount. Press ENTER to continue.", '#');
+    pWrongAmountMsg = new Baner("Insufficient resources. Press ENTER to continue.", '#');
+    windows.push_back(pWrongAmountMsg);
 }
 
 Game::~Game()
@@ -87,6 +98,8 @@ void Game::run(void)
                 switch(current_state) 
                 {
                     case state::TRAVEL:
+                        process_travel();
+                        break;
                     case state::MESSAGE:
                         go_back_to_main_window();
                         break;
@@ -104,12 +117,24 @@ void Game::run(void)
 void Game::travel(void)
 {
     current_state = state::TRAVEL;
-    windows.push_back(pTravels);
     addWindow(pTravels, 10, 5);
     pCurrentWindow = pTravels;
+}
 
-    // For tests only
-    this->budget -= 1000;
+void Game::process_travel(void)
+{
+    float travel_price = pTravels->getCurrentItem()->getPrice();
+    if(travel_price<=budget)
+    {
+        budget -= travel_price;
+        pTravels->updatePrices();
+        pAssets->updatePrices();
+        go_back_to_main_window();
+    } else
+    {
+        go_back_to_main_window();
+        go_to_wrong_amount();
+    }
 }
 
 void Game::go_back_to_main_window(void)
@@ -122,7 +147,6 @@ void Game::go_back_to_main_window(void)
 
 void Game::go_to_wrong_amount(void)
 {
-    windows.push_back(pWrongAmountMsg);
     addWindow(pWrongAmountMsg, 12, 5);
     pCurrentWindow = pWrongAmountMsg;
     current_state = state::MESSAGE;
