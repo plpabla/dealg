@@ -4,6 +4,17 @@
 
 using namespace std;
 
+class TestGame: public Game
+{
+    public:
+    TestGame(float budget=0.0, std::string assets_filename="", std::string cities_filename=""):
+        Game(budget,assets_filename, cities_filename) {};
+    ListWindow<Stock>* create_assets_list(void) {return Game::create_assets_list();};
+
+    ListWindow<Stock>* get_assets() {return pAssets;};
+};
+
+
 TEST(GameTest, CanInitWithDefaults)
 {
     Game g;
@@ -26,11 +37,6 @@ TEST(GameTest, CanUpdateBudget)
     ASSERT_EQ(g.getBudget(), 100);
 }
 
-class TestGame: public Game
-{
-    public:
-    ListWindow<Stock>* create_assets_list(void) {return Game::create_assets_list();};
-};
 
 TEST(GameTest, CanAccessAssetsListUsingChildClass)
 {
@@ -43,5 +49,14 @@ TEST(GameTest, CanAccessAssetsListUsingChildClass)
 
 TEST(GameTest, CanInitWithCustomFiles)
 {
-    ASSERT_NO_THROW(Game g(10000, "assets.txt", "cities.txt"));
+    ASSERT_NO_THROW(Game g(10000, "", ""));
+}
+
+TEST(GameTest, CorrectlyReadsAssetsFromAFile)
+{
+    TestGame g(100.00, "../test/test_assets.txt", "../test/test_cities.txt");
+
+    ASSERT_NE(g.get_assets(), nullptr);
+    ASSERT_EQ(g.get_assets()->getNumberOfElements(), 2);
+    ASSERT_EQ(g.get_assets()->getCurrentItem()->getName(), "TestA");
 }

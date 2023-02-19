@@ -1,6 +1,8 @@
 #include "Game.h"
 #include "DynamicBaner.h"
 
+#include <fstream>
+
 using namespace std;
 
 ListWindow<Stock>* Game::create_assets_list(void)
@@ -16,9 +18,30 @@ ListWindow<Stock>* Game::create_assets_list(void)
         pw->add(Stock("Item E",11,0,10,20));
         pw->add(Stock("Item E2",3900,0,200, 4e3));
         pw->add(Stock("Item E3",299,0,100, 300));
+        pw->updatePrices();
         return pw;
     } else
     {
+        ofstream fs2("halo.txt", ios::out);
+        fs2<<"x";
+        fs2.close();
+        cout<<"Trying to read from a file "<<assets_filename<<endl;
+        ifstream fs(assets_filename, ios::in);
+        if(!fs)
+        {
+            cout<<"    Not possible to open"<<endl;
+            cout<<"    rdstate: "<< fs.rdstate() <<endl;
+        }
+        string line;
+        while(getline(fs, line))
+        {
+            cout<<line<<endl;
+        }
+        fs.close();
+
+        ListWindow<Stock> *pw = new ListWindow<Stock> (80, 10, '#', '.', 9);
+        pw->add(Stock("Item A",150,0,100,200));
+        pw->add(Stock("Item B",2000,0,1000,2220));
         return nullptr;
     }
 }
