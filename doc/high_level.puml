@@ -2,14 +2,43 @@
 class Game
 {
     - float budget
+    - state current_state
+    - std::vector<GenericWindow*> windows;
+    - ListWindow<Stock>* pAssets
+    - ...
 
     + setBudget()
     + getBudget()
     + run()
     - travel()
+    - process_travel()
     - buy()
     - sell()
+    - go_back_to_main_window()
+    - go_to_wrong_amount()
 }
+
+note right of Game::windows
+All created windows are stored hear
+Used for rendering
+Also needed for clean up
+end note
+
+note right of Game::pAssets
+Store pointers to each window 
+I need to access directly
+end note
+
+enum state
+{
+    SELECT
+    TRAVEL
+    BUY
+    SELL
+    MESSAGE
+}
+
+state -* Game
 
 Game <|-- System
 
@@ -53,6 +82,11 @@ class InputWindow
 {
     + int getInput()
 }
+
+class DynamicBaner
+{
+    - float *pnum
+}
 class Frame
 class ListWindow
 {
@@ -67,6 +101,7 @@ class ListWindow
 }
 Frame <|-- ListWindow
 Baner <|-- InputWindow
+Baner <|-- DynamicBaner
 Frame <|-- Baner
 GenericWindow <|-- Frame
 
