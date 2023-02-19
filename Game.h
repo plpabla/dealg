@@ -1,5 +1,6 @@
 #pragma once
 #include <iostream>
+#include <string>
 #include <vector>
 #include "System.h"
 
@@ -33,16 +34,18 @@ class Game: public System
     Baner* pWrongAmountMsg = nullptr;
     Baner* pAreYouSureMsg = nullptr;
     InputWindow* pAmount = nullptr;
+    std::string assets_filename;
+    std::string cities_filename;
 
     public:
-    Game(float budget=0.0);
+    Game(float budget=0.0, std::string assets_filename="", std::string cities_filename="");
     ~Game() override;
     void run(void);
 
     float getBudget() {return budget;}
     void setBudget(float b) {budget=b;}
 
-    private:
+    protected:
     ListWindow<Stock>* create_assets_list(void);
     ListWindow<Stock>* create_travels_list(void);
 
