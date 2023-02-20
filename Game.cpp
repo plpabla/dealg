@@ -8,6 +8,7 @@ using namespace std;
 
 ListWindow<Stock>* Game::create_assets_list(void)
 {
+    ListWindow<Stock> *pw = new ListWindow<Stock> (80, 10, '#', '.', 9);
     if(assets_filename=="")
     {
         ListWindow<Stock> *pw = new ListWindow<Stock> (80, 10, '#', '.', 9);
@@ -23,22 +24,42 @@ ListWindow<Stock>* Game::create_assets_list(void)
         return pw;
     } else
     {
-        ListWindow<Stock> *pw = read_assets_from_file(assets_filename);
+        read_assets_from_file(pw, assets_filename);
         return pw;
     }
 }
 
-ListWindow<Stock>* Game::read_assets_from_file(std::string filename)
+ListWindow<Stock>* Game::create_travels_list(void)
 {
-    ifstream fs(assets_filename, ios::in);
+    if(cities_filename=="")
+    {
+        ListWindow<Stock> *pw = new ListWindow<Stock> (60, 8, '#', ' ');
+        pw->add(Stock("Krakow",400,0, 250, 400));
+        pw->add(Stock("Munich",290,0, 250, 400));
+        pw->add(Stock("Rome",320,0, 250, 400));
+        pw->add(Stock("Copenhagen",350,0, 250, 400));
+        pw->add(Stock("Amsterdam",370,0, 250, 400));
+        return pw;
+    } else
+    {
+        ListWindow<Stock> *pw = new ListWindow<Stock> (60, 8, '#', ' ');   
+        read_assets_from_file(pw, cities_filename);
+        return pw;
+    }
+}
+
+void Game::read_assets_from_file(ListWindow<Stock> *pw, std::string filename)
+{
+    ifstream fs(filename, ios::in);
     if(!fs)
     {
-        cout<<"    Not possible to open "<< assets_filename << endl;
+        cout<<"    Not possible to open "<< filename << endl;
         cout<<"    rdstate: "<< fs.rdstate() <<endl;
-        return nullptr;
+        delete pw;
+        pw = nullptr;
+        return;
     }
 
-    ListWindow<Stock> *pw = new ListWindow<Stock> (80, 10, '#', '.', 9);   
     string raw_line;
     istringstream stream_line;
     string name;
@@ -58,29 +79,12 @@ ListWindow<Stock>* Game::read_assets_from_file(std::string filename)
             cerr<<"Error during processing line: ["<<raw_line<<"]"<<endl;
             fs.close();
             delete pw;
-            return nullptr;
+            pw = nullptr;
+            return;
         }
         pw->add(Stock(name,0,0,vmin,vmax));
     }
     fs.close();
-    return pw;
-}
-
-ListWindow<Stock>* Game::create_travels_list(void)
-{
-    if(cities_filename=="")
-    {
-        ListWindow<Stock> *pw = new ListWindow<Stock> (60, 8, '#', ' ');
-        pw->add(Stock("Krakow",400,0, 250, 400));
-        pw->add(Stock("Munich",290,0, 250, 400));
-        pw->add(Stock("Rome",320,0, 250, 400));
-        pw->add(Stock("Copenhagen",350,0, 250, 400));
-        pw->add(Stock("Amsterdam",370,0, 250, 400));
-        return pw;
-    } else
-    {
-        return nullptr;
-    }
 }
 
 

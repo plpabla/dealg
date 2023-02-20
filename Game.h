@@ -48,7 +48,7 @@ class Game: public System
     protected:
     ListWindow<Stock>* create_assets_list(void);
     ListWindow<Stock>* create_travels_list(void);
-    ListWindow<Stock>* read_assets_from_file(std::string filename);
+    void read_assets_from_file(ListWindow<Stock> *pw, std::string filename);
 
     void travel(void);
     void process_travel(void);

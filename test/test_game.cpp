@@ -12,6 +12,7 @@ class TestGame: public Game
     ListWindow<Stock>* create_assets_list(void) {return Game::create_assets_list();};
 
     ListWindow<Stock>* get_assets() {return pAssets;};
+    ListWindow<Stock>* get_travels() {return pTravels;};
 };
 
 
@@ -59,4 +60,13 @@ TEST(GameTest, CorrectlyReadsAssetsFromAFile)
     ASSERT_NE(g.get_assets(), nullptr);
     ASSERT_EQ(g.get_assets()->getNumberOfElements(), 2);
     ASSERT_EQ(g.get_assets()->getCurrentItem()->getName(), "TestA");
+}
+
+TEST(GameTest, CorrectlyReadsTravelsFromAFile)
+{
+    TestGame g(100.00, "../test/test_assets.txt", "../test/test_cities.txt");
+
+    ASSERT_NE(g.get_travels(), nullptr);
+    ASSERT_EQ(g.get_travels()->getNumberOfElements(), 3);
+    ASSERT_EQ(g.get_travels()->getCurrentItem()->getName(), "Krakow");
 }
