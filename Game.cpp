@@ -2,6 +2,7 @@
 #include "DynamicBaner.h"
 
 #include <fstream>
+#include <sstream>
 
 using namespace std;
 
@@ -22,28 +23,47 @@ ListWindow<Stock>* Game::create_assets_list(void)
         return pw;
     } else
     {
-        ofstream fs2("halo.txt", ios::out);
-        fs2<<"x";
-        fs2.close();
-        cout<<"Trying to read from a file "<<assets_filename<<endl;
-        ifstream fs(assets_filename, ios::in);
-        if(!fs)
-        {
-            cout<<"    Not possible to open"<<endl;
-            cout<<"    rdstate: "<< fs.rdstate() <<endl;
-        }
-        string line;
-        while(getline(fs, line))
-        {
-            cout<<line<<endl;
-        }
-        fs.close();
+        ListWindow<Stock> *pw = read_assets_from_file(assets_filename);
+        return pw;
+    }
+}
 
-        ListWindow<Stock> *pw = new ListWindow<Stock> (80, 10, '#', '.', 9);
-        pw->add(Stock("Item A",150,0,100,200));
-        pw->add(Stock("Item B",2000,0,1000,2220));
+ListWindow<Stock>* Game::read_assets_from_file(std::string filename)
+{
+    ifstream fs(assets_filename, ios::in);
+    if(!fs)
+    {
+        cout<<"    Not possible to open "<< assets_filename << endl;
+        cout<<"    rdstate: "<< fs.rdstate() <<endl;
         return nullptr;
     }
+
+    ListWindow<Stock> *pw = new ListWindow<Stock> (80, 10, '#', '.', 9);   
+    string raw_line;
+    istringstream stream_line;
+    string name;
+    float vmin, vmax;
+    char dummy;
+    while(getline(fs, raw_line))
+    {
+        try
+        {
+            stream_line.clear();
+            stream_line.str(raw_line);
+            stream_line>>name>>vmin>>dummy>>vmax;
+        }
+        catch(const std::exception& e)
+        {
+            cerr << e.what() << '\n';
+            cerr<<"Error during processing line: ["<<raw_line<<"]"<<endl;
+            fs.close();
+            delete pw;
+            return nullptr;
+        }
+        pw->add(Stock(name,0,0,vmin,vmax));
+    }
+    fs.close();
+    return pw;
 }
 
 ListWindow<Stock>* Game::create_travels_list(void)

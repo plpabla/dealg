@@ -1,2 +1,2 @@
-TestA   100 200
-TestB   150 300
+TestA   100-200
+TestB   150-300
