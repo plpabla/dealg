@@ -1,33 +1,91 @@
 #include "Game.h"
 #include "DynamicBaner.h"
 
+#include <fstream>
+#include <sstream>
+
+using namespace std;
+
 ListWindow<Stock>* Game::create_assets_list(void)
 {
     ListWindow<Stock> *pw = new ListWindow<Stock> (80, 10, '#', '.', 9);
-    pw->add(Stock("Item A",150,0,100,200));
-    pw->add(Stock("Item B",2000,0,1000,2220));
-    pw->add(Stock("Item C",1000,0,1000,5000));
-    pw->add(Stock("Item D1",4000,0,40, 4000));
-    pw->add(Stock("Item D2",2600,0, 1e3, 4e3));
-    pw->add(Stock("Item E",11,0,10,20));
-    pw->add(Stock("Item E2",3900,0,200, 4e3));
-    pw->add(Stock("Item E3",299,0,100, 300));
-    return pw;
+    if(assets_filename=="")
+    {
+        pw->add(Stock("Item A",150,0,100,200));
+        pw->add(Stock("Item B",2000,0,1000,2220));
+        pw->add(Stock("Item C",1000,0,1000,5000));
+        pw->updatePrices();
+        return pw;
+    } else
+    {
+        read_assets_from_file(pw, assets_filename);
+        pw->updatePrices();
+        return pw;
+    }
 }
 
 ListWindow<Stock>* Game::create_travels_list(void)
 {
-    ListWindow<Stock> *pw = new ListWindow<Stock> (60, 8, '#', ' ');
-    pw->add(Stock("Krakow",400,0, 250, 400));
-    pw->add(Stock("Munich",290,0, 250, 400));
-    pw->add(Stock("Rome",320,0, 250, 400));
-    pw->add(Stock("Copenhagen",350,0, 250, 400));
-    pw->add(Stock("Amsterdam",370,0, 250, 400));
-    return pw;
+    ListWindow<Stock> *pw = new ListWindow<Stock> (35, 8, '#', ' ');
+    if(cities_filename=="")
+    {
+        pw->add(Stock("Krakow",400,0, 250, 400));
+        pw->add(Stock("Munich",290,0, 250, 400));
+        pw->add(Stock("Rome",320,0, 250, 400));
+        return pw;
+    } else
+    {
+        read_assets_from_file(pw, cities_filename);
+        pw->updatePrices();
+        return pw;
+    }
+}
+
+void Game::read_assets_from_file(ListWindow<Stock> *pw, std::string filename)
+{
+    ifstream fs(filename, ios::in);
+    if(!fs)
+    {
+        cout<<"    Not possible to open "<< filename << endl;
+        cout<<"    rdstate: "<< fs.rdstate() <<endl;
+        delete pw;
+        pw = nullptr;
+        return;
+    }
+
+    string raw_line;
+    istringstream stream_line;
+    string name;
+    float vmin, vmax;
+    char dummy;
+    while(getline(fs, raw_line))
+    {
+        try
+        {
+            stream_line.clear();
+            stream_line.str(raw_line);
+            stream_line>>name>>vmin>>dummy>>vmax;
+        }
+        catch(const std::exception& e)
+        {
+            cerr << e.what() << '\n';
+            cerr<<"Error during processing line: ["<<raw_line<<"]"<<endl;
+            fs.close();
+            delete pw;
+            pw = nullptr;
+            return;
+        }
+        pw->add(Stock(name,0,0,vmin,vmax));
+    }
+    fs.close();
 }
 
 
-Game::Game(float budget): System(), budget(budget) 
+Game::Game(float budget, string assets_filename, string cities_filename): 
+    System(), 
+    budget(budget),
+    assets_filename(assets_filename),
+    cities_filename(cities_filename)
 {
     current_state = state::SELECT;
 

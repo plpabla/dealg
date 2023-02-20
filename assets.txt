@@ -1,0 +1,8 @@
+Wheat   300-600
+Milk    400-700
+Alcohol 1000-1800
+Fuel    100-600
+Medicine    4000-6000
+Wood    500-900
+Car     16000-20000
+Weapon  8000-11000

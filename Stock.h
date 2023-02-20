@@ -12,7 +12,7 @@ class Stock: public Item
         Item(name, price), quantity(qty) 
         {
             // if all values are given, update accordingly
-            if(price>0 && price_min>0 && price_max>0)
+            if(price>=0 && price_min>0 && price_max>0)
             {
                 this->price_min = price_min;
                 this->price_max = price_max;

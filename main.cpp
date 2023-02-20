@@ -18,7 +18,7 @@ int main()
     keypad(stdscr, TRUE);
     noecho();
 
-    Game g(10000);
+    Game g(10000,"assets.txt","cities.txt");
     g.run();
 
     endwin();
