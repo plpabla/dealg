@@ -60,6 +60,8 @@ TEST(GameTest, CorrectlyReadsAssetsFromAFile)
     ASSERT_NE(g.get_assets(), nullptr);
     ASSERT_EQ(g.get_assets()->getNumberOfElements(), 2);
     ASSERT_EQ(g.get_assets()->getCurrentItem()->getName(), "TestA");
+    ASSERT_GE(g.get_assets()->getCurrentItem()->getPrice(), 42);
+    ASSERT_LE(g.get_assets()->getCurrentItem()->getPrice(), 69);
 }
 
 TEST(GameTest, CorrectlyReadsTravelsFromAFile)
