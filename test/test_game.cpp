@@ -54,7 +54,6 @@ TEST(GameTest, CanInitWithCustomFiles)
 }
 
 /* Tests are falling on github - to be checked */
-/*
 TEST(GameTest, CorrectlyReadsAssetsFromAFile)
 {
     TestGame g(100.00, "../test/test_assets.txt", "../test/test_cities.txt");
@@ -74,4 +73,3 @@ TEST(GameTest, CorrectlyReadsTravelsFromAFile)
     ASSERT_EQ(g.get_travels()->getNumberOfElements(), 3);
     ASSERT_EQ(g.get_travels()->getCurrentItem()->getName(), "Krakow");
 }
-*/
