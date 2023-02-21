@@ -17,7 +17,7 @@ jobs:
     - name: run make
       run: make
     - name: current dir
-      run: pwd
+      run: ll
     - name: run tests
       run: ./runTests
       
