@@ -16,6 +16,8 @@ jobs:
       run: cmake CMakeLists.txt
     - name: run make
       run: make
+    - name: current dir
+      run: pwd
     - name: run tests
       run: ./runTests
       
