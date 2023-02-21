@@ -33,6 +33,7 @@ class ListWindow : public Frame
     int getNumberOfElements(void) {return items.size();};
     void draw(Canvas &c, int x, int y) override;
     void updatePrices(void);
+    void updatePriceRanges(void);
 };
 
 template<typename Item_T> 
@@ -70,6 +71,15 @@ void ListWindow<Item_T>::updatePrices(void)
     for(auto & i: items)
     {
         i.updatePrice();
+    }
+}
+
+template<typename Item_T> 
+void ListWindow<Item_T>::updatePriceRanges(void)
+{
+    for(auto & i: items)
+    {
+        i.randomizePriceRange(0.05);
     }
 }
 
