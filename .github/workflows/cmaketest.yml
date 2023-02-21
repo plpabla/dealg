@@ -16,8 +16,10 @@ jobs:
       run: cmake CMakeLists.txt
     - name: run make
       run: make
-    - name: current dir content
-      run: ls
+    - name: current dir content - test
+      run: ls test/
+    - name: level up content
+      run: ll ../
     - name: run tests
       run: ./runTests
       
