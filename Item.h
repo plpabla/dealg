@@ -17,4 +17,5 @@ class Item
     float getPrice() const {return price;};
     void setPriceRange(float pmin, float pmax);
     virtual void updatePrice(void);
+    virtual void randomizePriceRange(float max_percent=0.0);
 };
