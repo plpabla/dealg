@@ -19,7 +19,7 @@ jobs:
     - name: current dir content - test
       run: ls test/
     - name: level up content
-      run: ll ../
+      run: ls ../
     - name: run tests
       run: ./runTests
       
