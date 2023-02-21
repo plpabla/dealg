@@ -2,6 +2,7 @@
 #include <cstdio>
 #include <ncurses.h>
 #include <string>
+#include <time.h>
 #include "Game.h"
 
 using namespace std;
@@ -9,6 +10,7 @@ using namespace std;
 
 int main()
 {
+    srand(time(NULL));
     initscr();
     start_color();
     init_pair(1, COLOR_WHITE, COLOR_BLACK);
