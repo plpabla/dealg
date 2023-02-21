@@ -20,8 +20,6 @@ jobs:
       run: mkdir ../test
     - name: copy test files 
       run: cp test/*.txt ../test/
-    - name: check
-      run: ls ../test/
     - name: run tests
       run: ./runTests
       
