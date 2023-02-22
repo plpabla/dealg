@@ -283,7 +283,7 @@ void Game::sell(void)
     if(n>0 && n<=item->getQty())
     {
         item->operator-=(n);
-        budget+=n*item->getPrice();
+        budget+=n*(SELL_PRICE_IN_PERCENT_OF_BUY_PRICE*item->getPrice());
         pCurrentWindow = pAssets;
         current_state = state::SELECT;
     } else
