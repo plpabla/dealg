@@ -80,6 +80,20 @@ TEST(StockTest, UpdatedPriceGeneratesPricesInGivenRange)
 }
 
 /**********************
+ * Price range randomizer
+***********************/
+TEST(StockTest, RandomizePriceRangeWorks)
+{
+    Stock s("Test", 10, 0, 10.0, 10.0);
+    s.updatePrice();
+    ASSERT_EQ(s.getPrice(), 10.0);
+
+    s.randomizePriceRange(0.02);
+    s.updatePrice();
+    ASSERT_NE(s.getPrice(), 10.0);
+}
+
+/**********************
  * Operator +- 
 ***********************/
 TEST(StockTest, CanAddQty)

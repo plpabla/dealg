@@ -214,6 +214,7 @@ void Game::process_travel(void)
         budget -= travel_price;
         pTravels->updatePrices();
         pAssets->updatePrices();
+        pAssets->updatePriceRanges();
         go_back_to_main_window();
     } else
     {
