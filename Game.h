@@ -58,4 +58,6 @@ class Game: public System
     void buy(void);
     void sell(void);
     void exit_state(void);
+    void check_if_game_is_lost(void);
+    void check_if_game_is_won(void);
 };

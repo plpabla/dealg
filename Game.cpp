@@ -289,6 +289,17 @@ void Game::sell(void)
     {
         go_to_wrong_amount();
     }
+
+    check_if_game_is_lost();
+    check_if_game_is_won();
 }
 
+void Game::check_if_game_is_lost(void)
+{
 
+}
+
+void Game::check_if_game_is_won(void)
+{
+
+}
