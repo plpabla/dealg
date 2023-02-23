@@ -225,7 +225,6 @@ void Game::process_travel(void)
 
 void Game::go_back_to_main_window(void)
 {
-    windows.pop_back();
     removeLastWindow();
     pCurrentWindow = pAssets;
     current_state = state::SELECT;
