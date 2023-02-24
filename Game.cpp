@@ -331,5 +331,10 @@ void Game::check_if_game_is_lost(void)
 
 void Game::check_if_game_is_won(void)
 {
-
+    if(budget>BUDGET_THRESHOLD_TO_WIN_THE_GAME)
+    {
+        addWindow(pYouWonMsg, 12, 8);
+        pCurrentWindow = pYouWonMsg;
+        current_state = state::END_OF_GAME_PROMPT;        
+    }
 }

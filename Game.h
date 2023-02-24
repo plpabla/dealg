@@ -15,6 +15,7 @@ class Game: public System
     protected:
     float budget;
     const float SELL_PRICE_IN_PERCENT_OF_BUY_PRICE = 0.9;
+    const float BUDGET_THRESHOLD_TO_WIN_THE_GAME = 1e6;
     std::vector<GenericWindow*> windows;
 
     enum state
