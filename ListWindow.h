@@ -30,6 +30,7 @@ class ListWindow : public Frame
         current_item_idx=0;
     };    
     Item_T* getCurrentItem(void); 
+    Item_T* getItem(int idx);
     int getNumberOfElements(void) {return items.size();};
     void draw(Canvas &c, int x, int y) override;
     void updatePrices(void);
@@ -47,6 +48,13 @@ template<typename Item_T>
 Item_T* ListWindow<Item_T>::getCurrentItem(void)
 {
     return (items.size() ? (&items[current_item_idx]) : nullptr);
+}
+
+template<typename Item_T> 
+Item_T* ListWindow<Item_T>::getItem(int idx)
+{
+    // TODO: Check if idx is in range
+    return &items[idx];
 }
 
 template<typename Item_T> 
