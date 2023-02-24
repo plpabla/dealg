@@ -126,6 +126,12 @@ Game::Game(float budget, string assets_filename, string cities_filename):
 
     pAreYouSureMsg = new Baner("Are you sure? [y]/[n]", '#');
     windows.push_back(pAreYouSureMsg);
+
+    pYouLostMsg = new Baner("It looks that you've lost. Press 'q'", '#');
+    windows.push_back(pYouLostMsg);
+
+    pYouWonMsg = new Baner("Congrats! You won by earning 1M. Press 'q'", '#');
+    windows.push_back(pYouWonMsg);
 }
 
 Game::~Game()
@@ -176,6 +182,8 @@ void Game::run(void)
                     case state::EXIT_PROMPT:
                         go_back_to_main_window();
                         break;
+                    case state::END_OF_GAME_PROMPT:
+                        return;
                     default:
                         exit_state();
                 }
@@ -221,6 +229,7 @@ void Game::process_travel(void)
         go_back_to_main_window();
         go_to_wrong_amount();
     }
+    check_if_game_is_lost();
 }
 
 void Game::go_back_to_main_window(void)
@@ -296,7 +305,28 @@ void Game::sell(void)
 
 void Game::check_if_game_is_lost(void)
 {
+    /* If I have anything to sell, I still can win */
+    for(int cnt = 0; cnt<pAssets->getNumberOfElements(); cnt++)
+    {
+        if(pAssets->getItem(cnt)->getQty()) return;
+    }
 
+    /* If I have more money than the cheapest trip I still can win */
+    float min_travel_price = budget;
+    for(int cnt = 0; cnt<pTravels->getNumberOfElements(); cnt++)
+    {
+        if(pTravels->getItem(cnt)->getPrice() > min_travel_price)
+        {
+            min_travel_price = pTravels->getItem(cnt)->getPrice();
+        }
+    }
+
+    if(budget<min_travel_price)
+    {
+        addWindow(pYouLostMsg, 12, 8);
+        pCurrentWindow = pYouLostMsg;
+        current_state = state::END_OF_GAME_PROMPT;
+    }
 }
 
 void Game::check_if_game_is_won(void)

@@ -25,6 +25,7 @@ class Game: public System
         SELL,
         MESSAGE,
         EXIT_PROMPT,
+        END_OF_GAME_PROMPT,
     };
     state current_state;
 
@@ -34,6 +35,8 @@ class Game: public System
     Baner* pBudget = nullptr;
     Baner* pWrongAmountMsg = nullptr;
     Baner* pAreYouSureMsg = nullptr;
+    Baner* pYouLostMsg = nullptr;
+    Baner* pYouWonMsg = nullptr;
     InputWindow* pAmount = nullptr;
     std::string assets_filename;
     std::string cities_filename;
